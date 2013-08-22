@@ -15,6 +15,10 @@ jQuery ->
       $.post(root_url + "projects/#{$(this).data('object')}", "position=#{$(this).data('position')}", null, "script")
       false
     )
+    .on('click', '[data-object="generate_lists"]', () ->
+      $.post(root_url + "projects/#{$(this).data('project-id')}/#{$(this).data('object')}", null, null, "script")
+      false
+    )
     .on('mouseover', '[data-object="show-actual-block-size"]', () ->
       $(this).data('original-html', $(this).html())
       block_size = calculate_block_size()

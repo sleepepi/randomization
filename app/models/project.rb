@@ -15,6 +15,7 @@ class Project < ActiveRecord::Base
 
   # Model Relationships
   belongs_to :user
+  has_many :assignments
 
   # Project Methods
 

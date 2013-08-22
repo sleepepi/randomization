@@ -1,0 +1,80 @@
+<div class="page-header">
+  <h1><%= @title %></h1>
+</div>
+
+<%= form_for @assignment, html: { class: 'form-horizontal' } do |f| %>
+  <% if @assignment.errors.any? %>
+    <div id="error_explanation" class="bs-callout bs-callout-danger">
+      <h4><%= pluralize(@assignment.errors.count, "error") %> prohibited this assignment from being saved</h4>
+
+      <ul>
+      <% @assignment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :project_id, nil, class: 'col-md-2 control-label' %>
+    <div class="col-md-10">
+      <%= f.select :project_id, [['---', nil]] + Project.current.collect{|p| [p.name, p.id]}, {}, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :list_name, nil, class: 'col-md-2 control-label' %>
+    <div class="col-md-10">
+      <%= f.text_field :list_name, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :block_group, nil, class: 'col-md-2 control-label' %>
+    <div class="col-md-10">
+      <%= f.number_field :block_group, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :multiplier, nil, class: 'col-md-2 control-label' %>
+    <div class="col-md-10">
+      <%= f.number_field :multiplier, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :position, nil, class: 'col-md-2 control-label' %>
+    <div class="col-md-10">
+      <%= f.number_field :position, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :treatment_arm, nil, class: 'col-md-2 control-label' %>
+    <div class="col-md-10">
+      <%= f.text_field :treatment_arm, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :subject_code, nil, class: 'col-md-2 control-label' %>
+    <div class="col-md-10">
+      <%= f.text_field :subject_code, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :randomization_at, nil, class: 'col-md-2 control-label' %>
+    <div class="col-md-10">
+      <%= f.datetime_select :randomization_at, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+      <%= f.submit nil, class: 'btn btn-primary' %>
+      <%= cancel %>
+    </div>
+  </div>
+<% end %>

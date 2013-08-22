@@ -1,0 +1,41 @@
+<% lists = @project.assignments.pluck(:list_name).uniq %>
+
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <% lists.each do |list| %>
+          <th style="white-space:nowrap"><strong><%= list %></strong></th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tr>
+      <% lists.each do |list| %>
+        <td>
+          <% @project.assignments.where( list_name: list ).order(:block_group).group_by(&:block_group).each do |block_group, assignments| %>
+            <div class="block-group">
+              <% assignment_block_position = 1 %>
+              <% current_multiplier = assignments.first.multiplier %>
+              <div class="multiplier multiplier_<%= current_multiplier %>">
+              <% assignments.each_with_index do |assignment, index| %>
+                <% if current_multiplier != assignment.multiplier or (assignment_block_position - 1 != 0 and (assignment_block_position - 1) % (assignment.multiplier * @project.minimum_block_size) == 0) %>
+                  <% current_multiplier = assignment.multiplier %>
+                  <% assignment_block_position = 2 %>
+                  </div>
+                  <div class="multiplier multiplier_<%= current_multiplier %>">
+                <% else %>
+                  <% assignment_block_position += 1 %>
+                <% end %>
+                  <div class="entry" style="white-space:nowrap">
+                    <%= assignment.position %> <%= assignment.treatment_arm %>
+                  </div>
+              <% end %>
+              </div>
+            </div>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  </table>
+</div>

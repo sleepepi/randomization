@@ -1,8 +1,8 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_viewable_project, only: [ :show ]
-  before_action :set_editable_project, only: [ :edit, :update, :destroy ]
-  before_action :redirect_without_project, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_editable_project, only: [ :edit, :update, :destroy, :generate_lists ]
+  before_action :redirect_without_project, only: [ :show, :edit, :update, :destroy, :generate_lists ]
 
   # POST /projects/add_treatment_arm.js
   def add_treatment_arm
@@ -10,6 +10,34 @@ class ProjectsController < ApplicationController
 
   # POST /projects/add_stratification_factor.js
   def add_stratification_factor
+  end
+
+  # POST /projects/1/generate_lists.js
+  def generate_lists
+    @project.assignments.destroy_all
+
+    block_group = @project.get_block_group
+    @project.lists.each do |list|
+      block_ordering = []
+      (1..@project.block_groups_per_list).each do
+        block_ordering << block_group.shuffle
+      end
+      entry_index = 0
+      block_ordering.each_with_index do |multipliers, index|
+        multipliers.each do |multiplier|
+          @project.get_block(multiplier).shuffle.each do |arm|
+            entry_index += 1
+            @project.assignments.create(
+              list_name: list.join(', '),
+              position: entry_index,
+              treatment_arm: arm,
+              block_group: index,
+              multiplier: multiplier
+            )
+          end
+        end
+      end
+    end
   end
 
   # GET /projects
