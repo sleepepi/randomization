@@ -26,6 +26,9 @@
   <dt>Minimum Block Size</dt>
   <dd><%= @project.minimum_block_size %></dd>
 
+  <dt>Block Size Multiplier</dt>
+  <dd><%= @project.block_size_multiplier %></dd>
+
   <dt>Stratification Factors</dt>
   <dd>
     <ul class="list-unstyled">
@@ -45,6 +48,9 @@
     </ul>
   </dd>
 
+  <dt>Target List Size</dt>
+  <dd><%= @project.target_list_size %></dd>
+
   <dt>Number of Lists</dt>
   <dd><%= @project.number_of_lists %></dd>
 
@@ -60,4 +66,13 @@
       </ul>
     <% end %>
   </dd>
+
+  <dt>Seed</dt>
+  <dd>My Seed</dd>
 </dl>
+
+<%#= link_to 'Generate Lists', '#', data: { object: 'generate_lists', project_id: @project.id }, class: 'btn btn-default btn-xs', style: 'margin-top:6px' %>
+
+<div id="generated_lists">
+  <%= render partial: 'generated_lists' %>
+</div>

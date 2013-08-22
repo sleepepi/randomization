@@ -5,6 +5,7 @@ Randomization::Application.routes.draw do
       post :add_treatment_arm
       post :add_stratification_factor
       post :add_option
+      post :generate_lists
     end
   end
 

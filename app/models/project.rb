@@ -1,6 +1,6 @@
 class Project < ActiveRecord::Base
 
-  MAX_LISTS = 128
+  MAX_LISTS = 64
 
   serialize :config, Hash
 
@@ -29,6 +29,14 @@ class Project < ActiveRecord::Base
     self.treatment_arms.sum{ |arm| arm[:allocation].blank? ? 1 : arm[:allocation].to_i }
   end
 
+  def block_size_multiplier
+    2
+  end
+
+  def get_block
+    self.treatment_arms.collect{|arm| [arm[:name]] * (arm[:allocation].blank? ? 1 : arm[:allocation].to_i) }.flatten.compact * block_size_multiplier
+  end
+
   def stratification_factors
     self.config[:stratification_factors] || []
   end
@@ -47,5 +55,13 @@ class Project < ActiveRecord::Base
 
   def number_of_lists
     self.stratification_factors.collect{|stratum| (stratum[:options] || []).size}.inject(:*).to_i
+  end
+
+  def target_list_size
+    80
+  end
+
+  def seed
+    "myseed"
   end
 end

@@ -1,0 +1,26 @@
+<table class="table">
+
+<tr>
+  <% block = @project.get_block %>
+  <% @project.lists.each do |list| %>
+    <% generated_list = [] %>
+
+    <% number_of_blocks_per_list = (@project.target_list_size / block.size.to_f).ceil %>
+
+    <% (1..number_of_blocks_per_list).each do %>
+      <% shuffled_block = block.shuffle %>
+      <% generated_list << shuffled_block %>
+    <% end %>
+
+    <% generated_list.flatten! %>
+
+    <td>
+      <strong style="white-space:nowrap"><%= list.join(', ') %></strong>
+      <% generated_list.each_with_index do |entry, index| %>
+        <div><%= index + 1 %>: <%= entry %></div>
+      <% end %>
+    </td>
+  <% end %>
+
+</tr>
+</table>
