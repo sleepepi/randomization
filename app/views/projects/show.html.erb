@@ -30,7 +30,7 @@
   <dd>
     <ul class="list-unstyled">
     <% @project.block_size_multipliers.each do |multiplier| %>
-      <li>&times;<%= multiplier[:value] %> &middot; <%= multiplier[:allocation] %></li>
+      <li><span style="border-width: 1px; border-style: solid" class="multiplier_<%= multiplier[:value] %>">&times;<%= multiplier[:value] %> &middot; <%= multiplier[:allocation] %></span></li>
     <% end %>
     </ul>
   </dd>

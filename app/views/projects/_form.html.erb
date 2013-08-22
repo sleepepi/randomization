@@ -50,7 +50,7 @@
             <% hash = @project.block_size_multipliers.select{|m| m[:value].to_s == multiplier.to_s}.first || { allocation: 0 } %>
             <%= hidden_field_tag "project[block_size_multipliers][][value]", multiplier %>
             <div class="input-group">
-              <span class="input-group-addon" data-object="show-actual-block-size" data-multiplier="<%= multiplier %>">&times;<%= multiplier %></span>
+              <span class="input-group-addon multiplier_<%= multiplier %>" data-object="show-actual-block-size" data-multiplier="<%= multiplier %>">&times;<%= multiplier %></span>
               <%= text_field_tag "project[block_size_multipliers][][allocation]", hash[:allocation], class: 'form-control', placeholder: 'Allocation' %>
             </div>
           </div>

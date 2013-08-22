@@ -1,39 +1,40 @@
-<table class="table">
-  <thead>
+<div class="table-responsive">
+  <table class="table">
+    <thead>
+      <tr>
+        <% @project.lists.each do |list| %>
+          <th style="white-space:nowrap"><strong><%= list.join(', ') %></strong></th>
+        <% end %>
+      </tr>
+    </thead>
+
     <tr>
+      <% block_group = @project.get_block_group %>
       <% @project.lists.each do |list| %>
-        <th style="white-space:nowrap"><strong><%= list.join(', ') %></strong></th>
+        <td>
+          <% block_ordering = [] %>
+          <% (1..@project.block_groups_per_list).each do %>
+            <% block_ordering << block_group.shuffle %>
+          <% end %>
+
+          <% entry_index = 0 %>
+          <% block_ordering.each do |multipliers| %>
+            <div class="block-group">
+              <% multipliers.each do |multiplier| %>
+                <div class="multiplier multiplier_<%= multiplier %>">
+                  <% @project.get_block(multiplier).shuffle.each do |entry| %>
+                    <% entry_index += 1 %>
+                    <div class="entry"><%= entry_index %> <%= entry %></div>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </td>
       <% end %>
     </tr>
-  </thead>
-
-  <tr>
-    <% block_group = @project.get_block_group %>
-    <% @project.lists.each do |list| %>
-      <td>
-        <% block_ordering = [] %>
-        <% (1..@project.block_groups_per_list).each do %>
-          <% block_ordering << block_group.shuffle %>
-        <% end %>
-
-        <% entry_index = 0 %>
-        <% block_ordering.each do |multipliers| %>
-          <div class="block-group">
-            <% multipliers.each do |multiplier| %>
-              <%# generated_list << { blocks: @project.get_block(multiplier).shuffle, block_index: block_index, multiplier: multiplier } %>
-              <div class="multiplier multiplier_<%= multiplier %>">
-                <% @project.get_block(multiplier).shuffle.each do |entry| %>
-                  <% entry_index += 1 %>
-                  <div class="entry"><%= entry_index %> <%= entry %></div>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </td>
-    <% end %>
-  </tr>
-</table>
+  </table>
+</div>
 
 <% if false %>
   <% block_group = @project.get_block_group %>
