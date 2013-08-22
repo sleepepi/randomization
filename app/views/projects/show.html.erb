@@ -1,4 +1,5 @@
 <% @title = @project.name %>
+
 <div class="page-header">
   <h1>
     <%= link_to "Projects", projects_path %> &middot; <%= @title %>
@@ -7,17 +8,56 @@
   <%= link_to "Delete Project", @project, method: :delete, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete Project #{@project.name}?" } %>
 </div>
 
+<%= simple_markdown @project.description %>
+
 <dl class="dl-horizontal">
-  <dt>Name</dt>
-  <dd><%= @project.name %></dd>
-
-  <dt>Description</dt>
-  <dd><%= simple_markdown @project.description %></dd>
-
-  <dt>User</dt>
+  <dt>Creator</dt>
   <dd><%= link_to @project.user.name, @project.user if @project.user %></dd>
 
-  <dt>Deleted</dt>
-  <dd><%= @project.deleted %></dd>
+  <dt>Treatment Arms</dt>
+  <dd>
+    <ul class="list-unstyled">
+      <% @project.treatment_arms.each do |arm| %>
+        <li><%= arm[:name] %> &middot; <%= arm[:allocation] %></li>
+      <% end %>
+    </ul>
+  </dd>
 
+  <dt>Minimum Block Size</dt>
+  <dd><%= @project.minimum_block_size %></dd>
+
+  <dt>Stratification Factors</dt>
+  <dd>
+    <ul class="list-unstyled">
+      <% @project.stratification_factors.each do |stratum| %>
+        <li>
+          <%= stratum[:name] %>
+          <% options = (stratum[:options] || []) %>
+          <% if options.size > 0 %>
+            <ul>
+            <% options.each do |option| %>
+              <li><%= option %></li>
+            <% end %>
+            </ul>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  </dd>
+
+  <dt>Number of Lists</dt>
+  <dd><%= @project.number_of_lists %></dd>
+
+  <dt>Lists</dt>
+  <dd>
+    <% if @project.number_of_lists > Project::MAX_LISTS %>
+      <div class="alert alert-danger">You have exceeded <b><%= Project::MAX_LISTS %></b> lists. Consider reducing the number of stratification factors.</div>
+    <% else %>
+      <ul class="list-unstyled">
+        <% @project.lists.each do |list| %>
+          <li><%= list.join(', ') %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </dd>
 </dl>

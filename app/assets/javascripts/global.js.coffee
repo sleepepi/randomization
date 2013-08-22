@@ -6,6 +6,10 @@ jQuery ->
       $($(this).data('target')).submit()
       false
     )
+    .on('click', '[data-object~="remove"]', () ->
+      $($(this).data('target')).remove()
+      false
+    )
 
   window.$isDirty = false
   msg = 'You haven\'t saved your changes.'

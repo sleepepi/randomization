@@ -1,0 +1,1 @@
+$("#stratum_<%= params[:position] %>_options").append("<%= escape_javascript(render( partial: "stratification_factors/option_form", locals: { option: '' } )) %>");

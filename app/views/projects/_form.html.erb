@@ -30,6 +30,30 @@
   </div>
 
   <div class="form-group">
+    <label class="col-md-2 control-label">Treatment Arms</label>
+    <div class="col-md-10">
+      <div id="treatment_arms">
+        <% @project.treatment_arms.each do |arm| %>
+          <%= render partial: 'treatment_arms/form', locals: { arm: arm } %>
+        <% end %>
+      </div>
+      <%= link_to 'Add Treatment Arm', '#', data: { object: 'add_treatment_arm' }, class: 'btn btn-default btn-xs', style: 'margin-top:6px' %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-md-2 control-label">Stratification Factors</label>
+    <div class="col-md-10">
+      <div id="stratification_factors">
+        <% @project.stratification_factors.each do |stratum| %>
+          <%= render partial: 'stratification_factors/form', locals: { stratum: stratum } %>
+        <% end %>
+      </div>
+      <%= link_to 'Add Stratification Factor', '#', data: { object: 'add_stratification_factor' }, class: 'btn btn-default btn-xs', style: 'margin-top:6px' %>
+    </div>
+  </div>
+
+  <div class="form-group">
     <div class="col-md-offset-2 col-md-10">
       <%= f.submit nil, class: 'btn btn-primary' %>
       <%= cancel %>

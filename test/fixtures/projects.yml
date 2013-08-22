@@ -1,13 +1,18 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+--- !map:HashWithIndifferentAccess
 
 one:
   name: MyString
   description: MyText
   user: valid
-  deleted: false
+  config: {
+            treatment_arms: [
+              { name: 'Arm A', allocation: 1 },
+              { name: 'Arm B', allocation: 1 }
+            ]
+          }
 
 two:
   name: MyString
   description: MyText
   user: admin
-  deleted: false

@@ -1,0 +1,21 @@
+<% position = Time.now.to_i.to_s + Time.now.usec.to_s unless position %>
+<% @position = position %>
+
+<div id="stratum_<%= @position %>" style="line-height:30px;padding-top:5px">
+  <div class="row">
+    <div class="col-xs-2">
+      <%= text_field_tag "project[stratification_factors][][name]", stratum[:name], class: 'form-control', placeholder: 'Name' %>
+    </div>
+    <div class="col-xs-2">
+      <%= link_to 'Add Option', '#', data: { object: 'add_option', position: @position }, class: 'btn btn-default btn-xs', style: 'margin-top:6px' %>
+    </div>
+    <div class="col-xs-3">
+      <%= link_to 'Remove', '#', class: 'btn btn-xs btn-danger-inverse', data: { object: 'remove', target: "#stratum_#{@position}" }, tabindex: '-1' %>
+    </div>
+  </div>
+  <div id="stratum_<%= @position %>_options">
+    <% (stratum[:options] || []).each do |option| %>
+      <%= render partial: 'stratification_factors/option_form', locals: { option: option } %>
+    <% end %>
+  </div>
+</div>

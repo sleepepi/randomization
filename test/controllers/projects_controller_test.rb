@@ -19,9 +19,10 @@ class ProjectsControllerTest < ActionController::TestCase
 
   test "should create project" do
     assert_difference('Project.count') do
-      post :create, project: { deleted: @project.deleted, description: @project.description, name: @project.name, user_id: @project.user_id }
+      post :create, project: { description: @project.description, name: @project.name, treatment_arms: [ { name: 'Arm One', allocation: 1 }, { name: 'Arm Two', allocation: 1 } ] }
     end
 
+    assert_equal 2, assigns(:project).treatment_arms.size
     assert_redirected_to project_path(assigns(:project))
   end
 
@@ -36,7 +37,9 @@ class ProjectsControllerTest < ActionController::TestCase
   end
 
   test "should update project" do
-    patch :update, id: @project, project: { deleted: @project.deleted, description: @project.description, name: @project.name, user_id: @project.user_id }
+    patch :update, id: @project, project: { description: @project.description, name: @project.name, treatment_arms: [ { name: 'Arm One', allocation: 1 }, { name: 'Arm Two', allocation: 1 }, { name: 'Arm Three', allocation: 1 } ] }
+
+    assert_equal 3, assigns(:project).treatment_arms.size
     assert_redirected_to project_path(assigns(:project))
   end
 

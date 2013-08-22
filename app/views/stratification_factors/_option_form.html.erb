@@ -1,0 +1,11 @@
+<% position = Time.now.to_i.to_s + Time.now.usec.to_s unless position %>
+<% @position = position %>
+
+<div id="stratum_<%= params[:position] %>_option_<%= @position %>" style="line-height:30px;padding-top:5px" class="row">
+  <div class="col-md-offset-2 col-xs-2">
+    <%= text_field_tag "project[stratification_factors][][options][]", option, class: 'form-control', placeholder: 'Option Name' %>
+  </div>
+  <div class="col-xs-3">
+    <%= link_to 'Remove', '#', class: 'btn btn-xs btn-danger-inverse', data: { object: 'remove', target: "#stratum_#{params[:position]}_option_#{@position}" }, tabindex: '-1' %>
+  </div>
+</div>

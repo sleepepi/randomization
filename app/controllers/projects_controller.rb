@@ -4,6 +4,13 @@ class ProjectsController < ApplicationController
   before_action :set_editable_project, only: [ :edit, :update, :destroy ]
   before_action :redirect_without_project, only: [ :show, :edit, :update, :destroy ]
 
+  # POST /projects/add_treatment_arm.js
+  def add_treatment_arm
+  end
+
+  # POST /projects/add_stratification_factor.js
+  def add_stratification_factor
+  end
 
   # GET /projects
   # GET /projects.json
@@ -87,6 +94,11 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit( :name, :description )
+      params.require(:project).permit(
+        :name,
+        :description,
+        { treatment_arms: [ :name, :allocation ] },
+        { stratification_factors: [ :name, options: [] ] }
+      )
     end
 end
