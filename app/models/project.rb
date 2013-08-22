@@ -46,6 +46,6 @@ class Project < ActiveRecord::Base
   end
 
   def number_of_lists
-    self.stratification_factors.collect{|stratum| (stratum[:options] || []).size}.inject(:*)
+    self.stratification_factors.collect{|stratum| (stratum[:options] || []).size}.inject(:*).to_i
   end
 end
