@@ -98,7 +98,8 @@ class ProjectsController < ApplicationController
         :name,
         :description,
         { treatment_arms: [ :name, :allocation ] },
-        { stratification_factors: [ :name, options: [] ] }
+        { stratification_factors: [ :name, options: [] ] },
+        { block_size_multipliers: [ :value, :allocation ] }
       )
     end
 end

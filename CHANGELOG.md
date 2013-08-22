@@ -6,6 +6,7 @@
   - Stratification Factors with options can now be specified
   - Lists are now generated as a product of the stratification factor options
   - Randomization lists are now popuplated by shuffled blocks
+  - Different block sizes and allocations can now be specified
 
 ## 0.0.0 (August 21, 2013)
 

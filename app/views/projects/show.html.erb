@@ -26,8 +26,17 @@
   <dt>Minimum Block Size</dt>
   <dd><%= @project.minimum_block_size %></dd>
 
-  <dt>Block Size Multiplier</dt>
-  <dd><%= @project.block_size_multiplier %></dd>
+  <dt>Block Size Multipliers</dt>
+  <dd>
+    <ul class="list-unstyled">
+    <% @project.block_size_multipliers.each do |multiplier| %>
+      <li>&times;<%= multiplier[:value] %> &middot; <%= multiplier[:allocation] %></li>
+    <% end %>
+    </ul>
+  </dd>
+
+  <dt>Combined Multipliers Size</dt>
+  <dd><%= @project.combined_multipliers_size %></dd>
 
   <dt>Stratification Factors</dt>
   <dd>
@@ -48,8 +57,8 @@
     </ul>
   </dd>
 
-  <dt>Target List Size</dt>
-  <dd><%= @project.target_list_size %></dd>
+  <dt>Randomization Goal</dt>
+  <dd><%= @project.randomization_goal %></dd>
 
   <dt>Number of Lists</dt>
   <dd><%= @project.number_of_lists %></dd>

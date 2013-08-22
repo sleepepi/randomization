@@ -42,6 +42,24 @@
   </div>
 
   <div class="form-group">
+    <label class="col-md-2 control-label">Block Size Multipliers</label>
+    <div class="col-md-10">
+      <div class="row">
+        <% Project::BLOCK_SIZE_MULTIPLIERS.each do |multiplier| %>
+          <div class="col-sm-3 col-xs-6">
+            <% hash = @project.block_size_multipliers.select{|m| m[:value].to_s == multiplier.to_s}.first || { allocation: 0 } %>
+            <%= hidden_field_tag "project[block_size_multipliers][][value]", multiplier %>
+            <div class="input-group">
+              <span class="input-group-addon" data-object="show-actual-block-size" data-multiplier="<%= multiplier %>">&times;<%= multiplier %></span>
+              <%= text_field_tag "project[block_size_multipliers][][allocation]", hash[:allocation], class: 'form-control', placeholder: 'Allocation' %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
     <label class="col-md-2 control-label">Stratification Factors</label>
     <div class="col-md-10">
       <div id="stratification_factors">

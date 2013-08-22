@@ -1,0 +1,39 @@
+.block-group {
+  margin-left: 2px;
+  margin-bottom: 10px;
+  border-left: 2px solid gray;
+  border-right: 2px solid gray;
+}
+
+.multiplier {
+  padding: 15px 30px 15px 15px;
+  border-left: 5px solid #eee;
+}
+
+/* Green */
+.multiplier_1 {
+  background-color: #f2faf6;
+  border-color: #b4dec1;
+}
+
+/* Red */
+.multiplier_2 {
+  background-color: #fcf2f2;
+  border-color: #dfb5b4;
+}
+
+/* Blue */
+.multiplier_3 {
+  background-color: #f0f7fd;
+  border-color: #d0e3f0;
+}
+
+/* Yellow */
+.multiplier_4 {
+  background-color: #fefbed;
+  border-color: #f1e7bc;
+}
+
+.entry {
+  /*padding: 10px;*/
+}
