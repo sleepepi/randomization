@@ -97,6 +97,7 @@ class ProjectsController < ApplicationController
       params.require(:project).permit(
         :name,
         :description,
+        :randomization_goal,
         { treatment_arms: [ :name, :allocation ] },
         { stratification_factors: [ :name, options: [] ] },
         { block_size_multipliers: [ :value, :allocation ] }

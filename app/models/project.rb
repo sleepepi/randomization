@@ -74,10 +74,6 @@ class Project < ActiveRecord::Base
     self.stratification_factors.collect{|stratum| (stratum[:options] || []).size}.inject(:*).to_i
   end
 
-  def randomization_goal
-    80
-  end
-
   def seed
     "myseed"
   end
