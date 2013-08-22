@@ -38,7 +38,7 @@ class Project < ActiveRecord::Base
   end
 
   def lists
-    if self.number_of_lists < MAX_LISTS
+    if self.number_of_lists > 0 and self.number_of_lists < MAX_LISTS
       self.stratification_factors.collect{|stratum| (stratum[:options] || [])}.inject(:product)
     else
       []
