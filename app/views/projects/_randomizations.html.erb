@@ -14,7 +14,7 @@
 
   <% @assignments.each do |assignment| %>
     <tr id="assignment_<%= assignment.id %>">
-      <td><%= assignment.list_name %></td>
+      <td><%= link_to assignment.list_name, [@project, assignment] %></td>
       <td><%= assignment.position %></td>
       <td><%= assignment.treatment_arm %></td>
       <td><%= assignment.subject_code %></td>
