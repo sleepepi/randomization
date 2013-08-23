@@ -8,7 +8,7 @@ class CreateAssignments < ActiveRecord::Migration
       t.integer :position
       t.string :treatment_arm
       t.string :subject_code
-      t.datetime :randomization_at
+      t.datetime :randomized_at
 
       t.timestamps
     end

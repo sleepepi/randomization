@@ -2,7 +2,7 @@
 <div class="page-header">
   <h1>
     <%= link_to "Projects", projects_path %> &middot; <%= link_to @project.name, @project %> &middot; <%= @title %>
-    <%#= link_to "Create Assignment", new_project_assignment_path(@project), class: 'btn btn-xs btn-primary' %>
+    <%= link_to "Randomize Subject", randomize_subject_project_path(@project), class: 'btn btn-xs btn-default' %>
   </h1>
 </div>
 

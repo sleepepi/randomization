@@ -20,7 +20,7 @@ class AssignmentsControllerTest < ActionController::TestCase
 
   # test "should create assignment" do
   #   assert_difference('Assignment.count') do
-  #     post :create, assignment: { block_group: @assignment.block_group, list_name: @assignment.list_name, multiplier: @assignment.multiplier, position: @assignment.position, project_id: @assignment.project_id, randomization_at: @assignment.randomization_at, subject_code: @assignment.subject_code, treatment_arm: @assignment.treatment_arm }
+  #     post :create, assignment: { block_group: @assignment.block_group, list_name: @assignment.list_name, multiplier: @assignment.multiplier, position: @assignment.position, project_id: @assignment.project_id, randomized_at: @assignment.randomized_at, subject_code: @assignment.subject_code, treatment_arm: @assignment.treatment_arm }
   #   end
 
   #   assert_redirected_to assignment_path(assigns(:assignment))
@@ -37,15 +37,16 @@ class AssignmentsControllerTest < ActionController::TestCase
   # end
 
   # test "should update assignment" do
-  #   patch :update, id: @assignment, assignment: { block_group: @assignment.block_group, list_name: @assignment.list_name, multiplier: @assignment.multiplier, position: @assignment.position, project_id: @assignment.project_id, randomization_at: @assignment.randomization_at, subject_code: @assignment.subject_code, treatment_arm: @assignment.treatment_arm }
+  #   patch :update, id: @assignment, assignment: { block_group: @assignment.block_group, list_name: @assignment.list_name, multiplier: @assignment.multiplier, position: @assignment.position, project_id: @assignment.project_id, randomized_at: @assignment.randomized_at, subject_code: @assignment.subject_code, treatment_arm: @assignment.treatment_arm }
   #   assert_redirected_to assignment_path(assigns(:assignment))
   # end
 
-  # test "should destroy assignment" do
-  #   assert_difference('Assignment.count', -1) do
-  #     delete :destroy, id: @assignment
-  #   end
+  test "should remove assignment randomization" do
+    delete :destroy, id: @assignment, project_id: @project.id
 
-  #   assert_redirected_to assignments_path
-  # end
+    assert_nil assigns(:assignment).subject_code
+    assert_nil assigns(:assignment).randomized_at
+
+    assert_redirected_to project_assignment_path(assigns(:project), assigns(:assignment))
+  end
 end

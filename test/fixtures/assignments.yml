@@ -1,21 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  project_id: 1
+  project: one
   list_name: MyString
-  block_group: 1
+  block_group: 0
   multiplier: 1
   position: 1
-  treatment_arm: MyString
-  subject_code: MyString
-  randomization_at: 2013-08-22 15:33:26
+  treatment_arm: Arm A
+  subject_code: S1234
+  randomized_at: 2013-08-22 15:33:26
 
 two:
-  project_id: 1
+  project: one
   list_name: MyString
-  block_group: 1
+  block_group: 0
   multiplier: 1
-  position: 1
-  treatment_arm: MyString
-  subject_code: MyString
-  randomization_at: 2013-08-22 15:33:26
+  position: 2
+  treatment_arm: Arm B
+  # subject_code:
+  # randomized_at:

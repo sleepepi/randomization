@@ -1,0 +1,49 @@
+<% @title = "Randomize Subject" %>
+<div class="page-header">
+  <h1>
+    <%= link_to "Projects", projects_path %> &middot; <%= link_to @project.name, @project %> &middot; <%= @title %>
+  </h1>
+</div>
+
+<%= form_tag create_randomization_project_path(@project), method: :post, class: 'form-horizontal' do |f| %>
+
+  <% if @project.errors.any? %>
+    <div id="error_explanation" class="bs-callout bs-callout-danger">
+      <h4><%= pluralize(@project.errors.count, "error") %> prohibited this subject from being randomized</h4>
+
+      <ul>
+      <% @project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= label :subject_code, 'Subject Code', class: 'col-md-2 control-label' %>
+    <div class="col-md-10">
+      <%= text_field_tag :subject_code, params[:subject_code], class: 'form-control' %>
+    </div>
+  </div>
+
+  <% @project.stratification_factors.each_with_index do |stratum, index| %>
+    <div class="form-group">
+      <label class="col-md-2 control-label"><%= stratum[:name] %></label>
+      <div class="col-md-10">
+        <% (stratum[:options] || []).each do |option| %>
+          <label class="radio-inline">
+            <%= radio_button_tag "stratum_#{index}", option, params["stratum_#{index}"] == option, class: 'radio' %> <%= option %>
+          </label>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+      <%= submit_tag "Randomize!", class: 'btn btn-lg btn-success' %>
+    </div>
+  </div>
+
+<% end %>

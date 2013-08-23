@@ -65,7 +65,11 @@ class Project < ActiveRecord::Base
 
   def lists
     if self.number_of_lists > 0 and self.number_of_lists < MAX_LISTS
-      self.stratification_factors.collect{|stratum| (stratum[:options] || [])}.inject(:product)
+      if self.stratification_factors.size == 1
+        (self.stratification_factors.first[:options] || []).collect{|i| [i]}
+      else
+        self.stratification_factors.collect{|stratum| (stratum[:options] || [])}.inject(:product)
+      end
     else
       []
     end
@@ -77,5 +81,27 @@ class Project < ActiveRecord::Base
 
   def seed
     "myseed"
+  end
+
+  def create_randomization!(subject_code, values)
+    list_name = values.join(', ')
+    if subject_code.blank?
+      self.errors.add(:subject_code, "can't be blank")
+    elsif self.assignments.where( subject_code: subject_code ).size > 0
+      self.errors.add(:subject_code, "has already been randomized")
+    end
+    if values.size != self.stratification_factors.size
+      self.errors.add(:stratification_factors, "must be selected")
+    elsif self.assignments.where( list_name: list_name ).size == 0
+      self.errors.add(:list, "#{list_name} does not exist")
+    elsif self.assignments.where( list_name: list_name, subject_code: nil ).size == 0
+      self.errors.add(:list, "#{list_name} is already full")
+    end
+
+    return nil if self.errors.size > 0
+
+    assignment = self.assignments.where( list_name: list_name, subject_code: nil ).first
+    assignment.update( subject_code: subject_code, randomized_at: Time.now ) if assignment
+    assignment
   end
 end

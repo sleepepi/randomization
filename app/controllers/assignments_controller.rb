@@ -56,16 +56,16 @@ class AssignmentsController < ApplicationController
   #   end
   # end
 
-  # # DELETE /assignments/1
-  # # DELETE /assignments/1.json
-  # def destroy
-  #   @assignment.destroy
+  # DELETE /assignments/1
+  # DELETE /assignments/1.json
+  def destroy
+    @assignment.update( subject_code: nil, randomized_at: nil )
 
-  #   respond_to do |format|
-  #     format.html { redirect_to assignments_path }
-  #     format.json { head :no_content }
-  #   end
-  # end
+    respond_to do |format|
+      format.html { redirect_to [@project, @assignment], notice: 'Randomization was successfully removed.' }
+      format.json { render action: 'show', status: :created, location: @assignment }
+    end
+  end
 
   private
 
@@ -80,7 +80,7 @@ class AssignmentsController < ApplicationController
     def assignment_params
       params[:assignment] ||= {}
       params.require(:assignment).permit(
-        # :project_id, :list_name, :block_group, :multiplier, :position, :treatment_arm, :subject_code, :randomization_at
+        # :project_id, :list_name, :block_group, :multiplier, :position, :treatment_arm, :subject_code, :randomized_at
       )
     end
 

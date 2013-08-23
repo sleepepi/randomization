@@ -3,6 +3,8 @@ Randomization::Application.routes.draw do
   resources :projects do
     member do
       post :generate_lists
+      get :randomize_subject
+      post :create_randomization
     end
 
     collection do

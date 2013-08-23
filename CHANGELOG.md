@@ -10,6 +10,9 @@
   - Randomization goal can now be specified
   - Randomization lists are now saved once generated, and can be regenerated
     - Lists show up as individual project assignments
+  - Subjects can now be randomized to lists
+  - Randomizations can be undone
+  - Lists can only be regenerated if they have zero randomized subjects
 
 ## 0.0.0 (August 21, 2013)
 

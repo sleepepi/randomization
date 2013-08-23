@@ -1,15 +1,22 @@
-<% @title = @assignment.name %>
+<% @title = @assignment.list_name %>
 <div class="page-header">
   <h1>
-    <%= link_to "Assignments", assignments_path %> &middot; <%= @title %>
+    <%= link_to "Projects", projects_path %> &middot; <%= link_to @project.name, @project %> &middot; <%= link_to "Assignments", project_assignments_path(@project) %> &middot; <%= @title %>
   </h1>
-  <%= link_to "Edit Assignment", edit_assignment_path(@assignment), class: 'btn btn-xs btn-default' %>
-  <%= link_to "Delete Assignment", @assignment, method: :delete, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete Assignment #{@assignment.name}?" } %>
+  <%#= link_to "Edit Assignment", edit_project_assignment_path(@project, @assignment), class: 'btn btn-xs btn-default' %>
+  <%#= link_to "Delete Assignment", [@project, @assignment], method: :delete, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete Assignment #{@assignment.list_name}?" } %>
+  <%= link_to "Undo Randomization", [@project, @assignment], method: :delete, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to remove subject from Assignment #{@assignment.list_name}?" } unless @assignment.subject_code.blank? %>
 </div>
 
 <dl class="dl-horizontal">
-  <dt>Project</dt>
-  <dd><%= link_to @assignment.project.name, @assignment.project if @assignment.project %></dd>
+  <dt>Subject Code</dt>
+  <dd><%= @assignment.subject_code %></dd>
+
+  <dt>Randomized At</dt>
+  <dd><%= @assignment.randomized_at %></dd>
+
+  <dt>Treatment Arm</dt>
+  <dd><%= @assignment.treatment_arm %></dd>
 
   <dt>List Name</dt>
   <dd><%= @assignment.list_name %></dd>
@@ -22,14 +29,5 @@
 
   <dt>Position</dt>
   <dd><%= @assignment.position %></dd>
-
-  <dt>Treatment Arm</dt>
-  <dd><%= @assignment.treatment_arm %></dd>
-
-  <dt>Subject Code</dt>
-  <dd><%= @assignment.subject_code %></dd>
-
-  <dt>Randomization At</dt>
-  <dd><%= @assignment.randomization_at %></dd>
 
 </dl>

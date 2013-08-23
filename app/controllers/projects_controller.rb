@@ -1,8 +1,24 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_viewable_project, only: [ :show ]
+  before_action :set_viewable_project, only: [ :show, :randomize_subject, :create_randomization ]
   before_action :set_editable_project, only: [ :edit, :update, :destroy, :generate_lists ]
-  before_action :redirect_without_project, only: [ :show, :edit, :update, :destroy, :generate_lists ]
+  before_action :redirect_without_project, only: [ :show, :edit, :update, :destroy, :generate_lists, :randomize_subject, :create_randomization ]
+
+  # GET /projects/1/randomize_subject
+  def randomize_subject
+  end
+
+  # POST /projects/1/create_randomization
+  def create_randomization
+    stratum_keys = params.keys.select{|key| key =~ /^stratum_[\d]*$/}
+    values = params.each.select{|key, value| stratum_keys.include?(key)}.collect{|k,v| v}.compact
+
+    if @assignment = @project.create_randomization!(params[:subject_code], values)
+      redirect_to [@project, @assignment], notice: "Subject successfully randomized to <b>#{@assignment.treatment_arm}</b>.".html_safe
+    else
+      render action: 'randomize_subject'
+    end
+  end
 
   # POST /projects/add_treatment_arm.js
   def add_treatment_arm

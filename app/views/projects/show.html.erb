@@ -7,6 +7,7 @@
   <%= link_to "Edit Project", edit_project_path(@project), class: 'btn btn-xs btn-default' %>
   <%= link_to "Delete Project", @project, method: :delete, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete Project #{@project.name}?" } %>
   <%= link_to "Assignments", project_assignments_path(@project), class: 'btn btn-xs btn-default' %>
+  <%= link_to "Randomize Subject", randomize_subject_project_path(@project), class: 'btn btn-xs btn-default' %>
 </div>
 
 <%= simple_markdown @project.description %>
@@ -80,12 +81,6 @@
   <dt>Seed</dt>
   <dd>My Seed</dd>
 </dl>
-
-<% if @project.assignments.size > 0 %>
-  <%= link_to 'Regenerate Lists', '#', data: { object: 'generate_lists', project_id: @project.id, confirm: 'Are you sure you want to irreversibly destroy the existing lists?' }, class: 'btn btn-danger-inverse btn-xs', style: 'margin-top:6px' %>
-<% else %>
-  <%= link_to 'Generate Lists', '#', data: { object: 'generate_lists', project_id: @project.id }, class: 'btn btn-default btn-xs', style: 'margin-top:6px' %>
-<% end %>
 
 <div id="generated_lists">
   <%= render partial: 'existing_lists' %>

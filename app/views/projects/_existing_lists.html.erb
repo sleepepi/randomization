@@ -1,4 +1,18 @@
-<% lists = @project.assignments.pluck(:list_name).uniq %>
+<% unless @project.assignments.where( "subject_code IS NOT NULL" ).size > 0 %>
+  <% if @project.assignments.size > 0 %>
+    <%= link_to 'Regenerate Lists', '#', data: { object: 'generate_lists', project_id: @project.id, confirm: 'Are you sure you want to irreversibly destroy the existing lists?' }, class: 'btn btn-danger-inverse btn-xs', style: 'margin-top:6px' %>
+  <% else %>
+    <%= link_to 'Generate Lists', '#', data: { object: 'generate_lists', project_id: @project.id }, class: 'btn btn-default btn-xs', style: 'margin-top:6px' %>
+  <% end %>
+<% else %>
+  <div class="bs-callout bs-callout-info">
+    <h4>Randomization Started</h4>
+
+    The lists are now <b>locked</b>. In order to recreate these lists, the existing randomizations need to be manually cleared. Click on the existing randomizations and then select <b>Undo Randomization</b>.
+  </div>
+<% end %>
+
+<% lists = @project.assignments.order(:id).pluck(:list_name).uniq %>
 
 <div class="table-responsive">
   <table class="table">
@@ -13,7 +27,7 @@
     <tr>
       <% lists.each do |list| %>
         <td>
-          <% @project.assignments.where( list_name: list ).order(:block_group).group_by(&:block_group).each do |block_group, assignments| %>
+          <% @project.assignments.where( list_name: list ).order(:block_group, :position).group_by(&:block_group).each do |block_group, assignments| %>
             <div class="block-group">
               <% assignment_block_position = 1 %>
               <% current_multiplier = assignments.first.multiplier %>
@@ -27,9 +41,16 @@
                 <% else %>
                   <% assignment_block_position += 1 %>
                 <% end %>
-                  <div class="entry" style="white-space:nowrap">
-                    <%= assignment.position %> <%= assignment.treatment_arm %>
-                  </div>
+
+                  <% if assignment.subject_code.blank? %>
+                    <div class="entry text-muted" style="white-space:nowrap">
+                      <%= assignment.position %> <%= assignment.treatment_arm %>
+                    </div>
+                  <% else %>
+                    <div class="entry" style="white-space:nowrap">
+                      <%= link_to "#{assignment.position} #{assignment.treatment_arm}", [assignment.project, assignment], rel: 'tooltip', title: assignment.subject_code %>
+                    </div>
+                  <% end %>
               <% end %>
               </div>
             </div>
