@@ -8,6 +8,7 @@
   <%= link_to "Delete Project", @project, method: :delete, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete Project #{@project.name}?" } %>
   <%= link_to "Assignments", project_assignments_path(@project), class: 'btn btn-xs btn-default' %>
   <%= link_to "Randomize Subject", randomize_subject_project_path(@project), class: 'btn btn-xs btn-default' %>
+  <%= link_to "Randomizations", randomizations_project_path(@project), class: 'btn btn-xs btn-default' %>
 </div>
 
 <%= simple_markdown @project.description %>

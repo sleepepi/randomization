@@ -5,6 +5,7 @@ Randomization::Application.routes.draw do
       post :generate_lists
       get :randomize_subject
       post :create_randomization
+      get :randomizations
     end
 
     collection do

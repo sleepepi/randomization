@@ -104,4 +104,8 @@ class Project < ActiveRecord::Base
     assignment.update( subject_code: subject_code, randomized_at: Time.now ) if assignment
     assignment
   end
+
+  def randomizations
+    self.assignments.where( "subject_code IS NOT NULL" )
+  end
 end

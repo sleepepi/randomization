@@ -1,8 +1,14 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_viewable_project, only: [ :show, :randomize_subject, :create_randomization ]
+  before_action :set_viewable_project, only: [ :show, :randomize_subject, :create_randomization, :randomizations ]
   before_action :set_editable_project, only: [ :edit, :update, :destroy, :generate_lists ]
-  before_action :redirect_without_project, only: [ :show, :edit, :update, :destroy, :generate_lists, :randomize_subject, :create_randomization ]
+  before_action :redirect_without_project, only: [ :show, :edit, :update, :destroy, :generate_lists, :randomize_subject, :create_randomization, :randomizations ]
+
+  # GET /projcets/1/randomizations
+  def randomizations
+    @order = scrub_order(Assignment, params[:order], "assignments.randomized_at")
+    @assignments = @project.randomizations.order(@order).page(params[:page]).per( 20 )
+  end
 
   # GET /projects/1/randomize_subject
   def randomize_subject

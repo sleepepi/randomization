@@ -8,7 +8,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments
   # GET /assignments.json
   def index
-    @order = scrub_order(Assignment, params[:order], "assignments.list_name")
+    @order = scrub_order(Assignment, params[:order], "assignments.randomized_at, assignments.id")
     @assignments = @project.assignments.order(@order).page(params[:page]).per( 20 )
   end
 
@@ -64,6 +64,7 @@ class AssignmentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to [@project, @assignment], notice: 'Randomization was successfully removed.' }
       format.json { render action: 'show', status: :created, location: @assignment }
+      format.js
     end
   end
 

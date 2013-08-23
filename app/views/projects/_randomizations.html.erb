@@ -13,7 +13,7 @@
   </thead>
 
   <% @assignments.each do |assignment| %>
-    <tr>
+    <tr id="assignment_<%= assignment.id %>">
       <td><%= assignment.list_name %></td>
       <td><%= assignment.position %></td>
       <td><%= assignment.treatment_arm %></td>

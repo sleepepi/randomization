@@ -13,21 +13,15 @@
   <dd><%= @assignment.subject_code %></dd>
 
   <dt>Randomized At</dt>
-  <dd><%= @assignment.randomized_at %></dd>
+  <dd><%= simple_time @assignment.randomized_at %></dd>
 
   <dt>Treatment Arm</dt>
   <dd><%= @assignment.treatment_arm %></dd>
 
+  <dt>Treatment Position</dt>
+  <dd><%= @assignment.position %></dd>
+
   <dt>List Name</dt>
   <dd><%= @assignment.list_name %></dd>
-
-  <dt>Block Group</dt>
-  <dd><%= @assignment.block_group %></dd>
-
-  <dt>Multiplier</dt>
-  <dd><%= @assignment.multiplier %></dd>
-
-  <dt>Position</dt>
-  <dd><%= @assignment.position %></dd>
 
 </dl>
