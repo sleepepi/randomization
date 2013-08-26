@@ -79,7 +79,7 @@ class User < ActiveRecord::Base
   private
 
     def notify_system_admins
-      User.current.system_admins.each do |system_admin|
+      User.current.where( system_admin: true ).each do |system_admin|
         UserMailer.notify_system_admin(system_admin, self).deliver if Rails.env.production?
       end
     end
