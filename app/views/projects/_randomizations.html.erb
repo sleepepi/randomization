@@ -3,6 +3,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th style="white-space:nowrap">Randomization #</th>
       <th style="white-space:nowrap"><%== sort_field_helper(@order, 'assignments.subject_code', 'Subject Code', 'assignments_search') %></th>
       <th style="white-space:nowrap"><%== sort_field_helper(@order, 'assignments.treatment_arm', 'Treatment Arm', 'assignments_search') %></th>
       <th style="white-space:nowrap"><%== sort_field_helper(@order, 'assignments.list_name', 'List Name', 'assignments_search') %></th>
@@ -15,6 +16,7 @@
 
   <% @assignments.each do |assignment| %>
     <tr id="assignment_<%= assignment.id %>">
+      <td><%= assignment.randomization_number %></td>
       <td><%= link_to assignment.subject_code, [@project, assignment] %></td>
       <td><%= assignment.treatment_arm %></td>
       <td><%= assignment.list_name %></td>

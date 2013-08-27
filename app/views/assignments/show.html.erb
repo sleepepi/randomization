@@ -19,7 +19,10 @@
 <% if @assignment.subject_code and @assignment.user %>
   <div class="jumbotron">
     <div class="container">
-      <h1><%= @assignment.treatment_arm %></h1>
+      <h1>
+        <%= @assignment.treatment_arm %>
+        <small><%= @assignment.randomization_number %> of <%= @assignment.project.randomization_goal %></small>
+      </h1>
       <p><b><%= @assignment.subject_code %></b> randomized <%= simple_time @assignment.randomized_at %> by <%= @assignment.user.name %> </p>
     </div>
   </div>

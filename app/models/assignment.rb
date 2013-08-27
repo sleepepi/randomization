@@ -7,4 +7,10 @@ class Assignment < ActiveRecord::Base
   belongs_to :project
   belongs_to :user
 
+  # Assignment Methods
+
+  def randomization_number
+    self.project.randomizations.order(:randomized_at).pluck(:id).index(self.id) + 1 rescue nil
+  end
+
 end
