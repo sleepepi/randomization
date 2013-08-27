@@ -6,7 +6,7 @@ class ProjectsController < ApplicationController
 
   # GET /projcets/1/randomizations
   def randomizations
-    @order = scrub_order(Assignment, params[:order], "assignments.randomized_at")
+    @order = scrub_order(Assignment, params[:order], "assignments.randomized_at DESC")
     @assignments = @project.randomizations.order(@order).page(params[:page]).per( 20 )
   end
 
