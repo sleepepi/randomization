@@ -1,6 +1,7 @@
 class AssignmentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_editable_project,          only: [ :index, :show, :new, :edit, :create, :update, :destroy ]
+  before_action :set_viewable_project,          only: [ :show ]
+  before_action :set_editable_project,          only: [ :index, :new, :edit, :create, :update, :destroy ]
   before_action :redirect_without_project,      only: [ :index, :show, :new, :edit, :create, :update, :destroy ]
   before_action :set_assignment,                only: [ :show, :edit, :update, :destroy ]
   before_action :redirect_without_assignment,   only: [ :show, :edit, :update, :destroy ]
@@ -71,7 +72,11 @@ class AssignmentsController < ApplicationController
   private
 
     def set_assignment
-      @assignment = @project.assignments.find(params[:id])
+      @assignment = if @project.editable_by?(current_user)
+        @project.assignments.find_by_id(params[:id])
+      else
+        @project.randomizations.find_by_id(params[:id])
+      end
     end
 
     def redirect_without_assignment

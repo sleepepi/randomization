@@ -23,7 +23,10 @@
   <dd>
     <ul class="list-unstyled">
       <% @project.treatment_arms.each do |arm| %>
-        <li><%= arm[:name] %> &middot; <%= arm[:allocation] %></li>
+        <li>
+          <%= arm[:name] %>
+          <% if @project.editable_by?(current_user) %>&middot; <%= arm[:allocation] %><% end %>
+        </li>
       <% end %>
     </ul>
   </dd>
@@ -67,8 +70,10 @@
   <dt>Randomization Goal</dt>
   <dd><%= @project.randomization_goal %></dd>
 
+<% if @project.editable_by?(current_user) %>
   <dt>Number of Lists</dt>
   <dd><%= @project.number_of_lists %></dd>
+<% end %>
 
   <dt>Lists</dt>
   <dd>
@@ -93,6 +98,8 @@
   <div id="generated_lists">
     <%= render partial: 'existing_lists' %>
   </div>
+<% else %>
+  <%= render partial: 'existing_short_lists' %>
 <% end %>
 
 <% if @project.editable_by?(current_user) %>

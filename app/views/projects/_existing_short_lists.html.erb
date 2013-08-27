@@ -1,0 +1,33 @@
+<% lists = @project.assignments.order(:id).pluck(:list_name).uniq %>
+
+<div class="table-responsive">
+  <table class="table" style="table-layout:fixed;">
+    <thead>
+      <tr>
+        <% lists.each do |list| %>
+          <th style="white-space:nowrap"><strong><%= list %></strong></th>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tr>
+      <% lists.each do |list| %>
+        <td>
+          <% @project.randomizations.where( list_name: list ).order(:block_group, :position).group_by(&:block_group).each do |block_group, assignments| %>
+            <% assignments.each_with_index do |assignment, index| %>
+              <% if assignment.subject_code.blank? %>
+                <div class="entry text-muted" style="white-space:nowrap">
+                  <%= assignment.position %>
+                </div>
+              <% else %>
+                <div class="entry" style="white-space:nowrap">
+                  <%= assignment.position %> &middot; <%= link_to assignment.treatment_arm, [assignment.project, assignment] %> &middot; <%= assignment.subject_code %>
+                </div>
+              <% end %>
+            <% end %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
+  </table>
+</div>
