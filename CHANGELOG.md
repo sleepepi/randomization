@@ -13,6 +13,7 @@
   - Subjects can now be randomized to lists
   - Randomizations can be undone
   - Lists can only be regenerated if they have zero randomized subjects
+  - Editors and Viewers can now be invited to projects
 
 ## 0.0.0 (August 21, 2013)
 

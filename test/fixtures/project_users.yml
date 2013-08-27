@@ -1,0 +1,39 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  project: one
+  user: valid
+  editor: false
+  creator: valid
+
+two:
+  project: two
+  user: valid
+  editor: false
+  creator: valid
+  invite_token: validintwo
+
+three:
+  project: one
+  user: pending
+  editor: false
+  creator: valid
+
+four:
+  project: one
+  user: admin
+  editor: true
+  creator: valid
+
+five:
+  project: three
+  user: valid
+  editor: false
+  creator: valid
+
+invited:
+  project: one
+  creator: valid
+  editor: true
+  invite_token: abc123
+  invite_email: invited_user@example.com

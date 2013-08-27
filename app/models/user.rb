@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   # Named Scopes
   scope :current, -> { where deleted: false }
   scope :search, lambda { |arg| where( 'LOWER(first_name) LIKE ? or LOWER(last_name) LIKE ? or LOWER(email) LIKE ?', arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%') ) }
+  scope :with_project, lambda { |*args| where("users.id in (select projects.user_id from projects where projects.id IN (?) and projects.deleted = ?) or users.id in (select project_users.user_id from project_users where project_users.project_id IN (?) and project_users.editor IN (?))", args.first, false, args.first, args[1] ) }
 
   # Model Validation
   validates_presence_of :first_name, :last_name
@@ -28,17 +29,19 @@ class User < ActiveRecord::Base
 
   def all_projects
     @all_projects ||= begin
-      Project.current.where( user_id: self.id ) #.with_editor(self.id, true)
+      Project.current.with_editor(self.id, true)
     end
   end
 
   def all_viewable_projects
     @all_viewable_projects ||= begin
-      Project.current.where( user_id: self.id ) # .with_editor(self.id, [true, false])
+      Project.current.with_editor(self.id, [true, false])
     end
   end
 
-
+  def associated_users
+    User.where( deleted: false ).with_project(self.all_projects.pluck(:id), [true, false])
+  end
 
   def name
     "#{first_name} #{last_name}"

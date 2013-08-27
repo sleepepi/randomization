@@ -17,6 +17,15 @@ Randomization::Application.routes.draw do
     resources :assignments
   end
 
+  resources :project_users do
+    member do
+      post :resend
+    end
+    collection do
+      get :accept
+    end
+  end
+
   devise_for :users, controllers: { registrations: 'contour/registrations', sessions: 'contour/sessions', passwords: 'contour/passwords', confirmations: 'contour/confirmations', unlocks: 'contour/unlocks' }, path_names: { sign_up: 'register', sign_in: 'login' }
 
   resources :users do

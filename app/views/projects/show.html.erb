@@ -4,9 +4,11 @@
   <h1>
     <%= link_to "Projects", projects_path %> &middot; <%= @title %>
   </h1>
-  <%= link_to "Edit Project", edit_project_path(@project), class: 'btn btn-xs btn-default' %>
-  <%= link_to "Delete Project", @project, method: :delete, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete Project #{@project.name}?" } %>
-  <%= link_to "Assignments", project_assignments_path(@project), class: 'btn btn-xs btn-default' %>
+  <% if @project.editable_by?(current_user) %>
+    <%= link_to "Edit Project", edit_project_path(@project), class: 'btn btn-xs btn-default' %>
+    <%= link_to "Delete Project", @project, method: :delete, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete Project #{@project.name}?" } %>
+    <%= link_to "Assignments", project_assignments_path(@project), class: 'btn btn-xs btn-default' %>
+  <% end %>
   <%= link_to "Randomize Subject", randomize_subject_project_path(@project), class: 'btn btn-xs btn-default' %>
   <%= link_to "Randomizations", randomizations_project_path(@project), class: 'btn btn-xs btn-default' %>
 </div>
@@ -26,6 +28,7 @@
     </ul>
   </dd>
 
+<% if @project.editable_by?(current_user) %>
   <dt>Minimum Block Size</dt>
   <dd><%= @project.minimum_block_size %></dd>
 
@@ -40,6 +43,7 @@
 
   <dt>Combined Multipliers Size</dt>
   <dd><%= @project.combined_multipliers_size %></dd>
+<% end %>
 
   <dt>Stratification Factors</dt>
   <dd>
@@ -79,10 +83,31 @@
     <% end %>
   </dd>
 
+<% if @project.editable_by?(current_user) %>
   <dt>Seed</dt>
   <dd>My Seed</dd>
+<% end %>
 </dl>
 
-<div id="generated_lists">
-  <%= render partial: 'existing_lists' %>
-</div>
+<% if @project.editable_by?(current_user) %>
+  <div id="generated_lists">
+    <%= render partial: 'existing_lists' %>
+  </div>
+<% end %>
+
+<% if @project.editable_by?(current_user) %>
+  <div class="page-header">
+    <h2>Sharing</h2>
+  </div>
+
+  <div class="row">
+    <% ['editors', 'viewers'].each do |relation, editor| %>
+      <div class="col-md-6">
+        <% @relation = relation; @editor = editor %>
+        <p>
+          <div id="<%= @relation %>_list"><%= render partial: 'project_users/index' %></div>
+        </p>
+      </div>
+    <% end %>
+  </div>
+<% end %>

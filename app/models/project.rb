@@ -9,6 +9,7 @@ class Project < ActiveRecord::Base
   include Deletable, Searchable
 
   # Named Scopes
+  scope :with_editor, lambda { |*args| where('projects.user_id IN (?) or projects.id in (select project_users.project_id from project_users where project_users.user_id = ? and project_users.editor IN (?))', args.first, args.first, args[1] ).references(:project_users) }
 
   # Model Validation
   validates_presence_of :name, :user_id
@@ -17,7 +18,18 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :assignments
 
+  has_many :project_users
+  has_many :users, -> { where( deleted: false ).order( 'last_name, first_name' ) }, through: :project_users
+  has_many :editors, -> { where('project_users.editor = ? and users.deleted = ?', true, false) }, through: :project_users, source: :user
+  has_many :viewers, -> { where('project_users.editor = ? and users.deleted = ?', false, false) }, through: :project_users, source: :user
+
   # Project Methods
+
+  def editable_by?(current_user)
+    @editable_by ||= begin
+      current_user.all_projects.where(id: self.id).count == 1
+    end
+  end
 
   def treatment_arms
     self.config[:treatment_arms] || []
