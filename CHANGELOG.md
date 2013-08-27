@@ -14,6 +14,7 @@
   - Randomizations can be undone
   - Lists can only be regenerated if they have zero randomized subjects
   - Editors and Viewers can now be invited to projects
+  - Randomizations now keep track of the user who randomized the subject
 
 ## 0.0.0 (August 21, 2013)
 

@@ -15,6 +15,9 @@
   <dt>Randomized At</dt>
   <dd><%= simple_time @assignment.randomized_at %></dd>
 
+  <dt>Randomized By</dt>
+  <dd><%= link_to @assignment.user.name, @assignment.user if @assignment.user %></dd>
+
   <dt>Treatment Arm</dt>
   <dd><%= @assignment.treatment_arm %></dd>
 

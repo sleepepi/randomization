@@ -59,7 +59,7 @@ class AssignmentsController < ApplicationController
   # DELETE /assignments/1
   # DELETE /assignments/1.json
   def destroy
-    @assignment.update( subject_code: nil, randomized_at: nil )
+    @assignment.update( subject_code: nil, randomized_at: nil, user_id: nil )
 
     respond_to do |format|
       format.html { redirect_to [@project, @assignment], notice: 'Randomization was successfully removed.' }

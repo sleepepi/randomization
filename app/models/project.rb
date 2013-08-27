@@ -95,7 +95,7 @@ class Project < ActiveRecord::Base
     "myseed"
   end
 
-  def create_randomization!(subject_code, values)
+  def create_randomization!(subject_code, values, current_user)
     list_name = values.join(', ')
     if subject_code.blank?
       self.errors.add(:subject_code, "can't be blank")
@@ -113,7 +113,7 @@ class Project < ActiveRecord::Base
     return nil if self.errors.size > 0
 
     assignment = self.assignments.where( list_name: list_name, subject_code: nil ).first
-    assignment.update( subject_code: subject_code, randomized_at: Time.now ) if assignment
+    assignment.update( subject_code: subject_code, randomized_at: Time.now, user_id: current_user.id ) if assignment
     assignment
   end
 
