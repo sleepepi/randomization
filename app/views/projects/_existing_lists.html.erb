@@ -19,7 +19,10 @@
     <thead>
       <tr>
         <% lists.each do |list| %>
-          <th style="white-space:nowrap"><strong><%= list %></strong></th>
+          <th style="white-space:nowrap">
+            <strong><%= list %></strong>
+            <small class="text-muted">(<%= @project.randomizations.where( list_name: list ).count %>)</small>
+          </th>
         <% end %>
       </tr>
     </thead>

@@ -17,6 +17,7 @@
   - Randomizations now keep track of the user who randomized the subject
   - Emails are sent when subjects are randomized
   - Randomizations now show the randomization number of the total randomization goal
+  - Number of subjects per treatment arm are listed on project show page
 
 ## 0.0.0 (August 21, 2013)
 
