@@ -74,4 +74,8 @@ class ApplicationHelperTest < ActionView::TestCase
     assert_equal true, safe_url?("mailto:valid@example.com")
   end
 
+  test "should escape leading numbers in description" do
+    assert_equal "<p>&#53;. This is my description with a leading five.</p>\n", simple_markdown("5. This is my description with a leading five.")
+  end
+
 end

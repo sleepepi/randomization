@@ -31,6 +31,19 @@ class AssignmentsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should show randomized assignment to viewer" do
+    login(users(:viewer))
+    get :show, id: @assignment, project_id: @project.id
+    assert_response :success
+  end
+
+  test "should not show unrandomized assignment to viewer" do
+    login(users(:viewer))
+    get :show, id: assignments(:two), project_id: @project.id
+    assert_nil assigns(:assignment)
+    assert_redirected_to project_assignments_path(assigns(:project))
+  end
+
   # test "should get edit" do
   #   get :edit, id: @assignment
   #   assert_response :success

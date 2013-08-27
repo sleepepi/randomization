@@ -91,10 +91,6 @@ class Project < ActiveRecord::Base
     self.stratification_factors.collect{|stratum| (stratum[:options] || []).size}.inject(:*).to_i
   end
 
-  def seed
-    "myseed"
-  end
-
   def create_randomization!(subject_code, values, current_user)
     list_name = values.join(', ')
     if subject_code.blank?
@@ -113,7 +109,13 @@ class Project < ActiveRecord::Base
     return nil if self.errors.size > 0
 
     assignment = self.assignments.where( list_name: list_name, subject_code: nil ).first
-    assignment.update( subject_code: subject_code, randomized_at: Time.now, user_id: current_user.id ) if assignment
+    if assignment
+      assignment.update( subject_code: subject_code, randomized_at: Time.now, user_id: current_user.id )
+      users_to_email = (self.users + [self.user] - [current_user]).uniq
+      users_to_email.each do |user_to_email|
+        UserMailer.subject_randomized(assignment, user_to_email).deliver if Rails.env.production? and user_to_email.email_on?(:send_email)
+      end
+    end
     assignment
   end
 

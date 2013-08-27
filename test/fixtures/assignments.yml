@@ -2,20 +2,23 @@
 
 one:
   project: one
-  list_name: MyString
+  list_name: "BOS, Female"
   block_group: 0
   multiplier: 1
   position: 1
   treatment_arm: Arm A
   subject_code: S1234
   randomized_at: 2013-08-22 15:33:26
+  user: valid
 
 two:
   project: one
-  list_name: MyString
+  list_name: "BOS, Male"
   block_group: 0
   multiplier: 1
-  position: 2
+  position: 1
   treatment_arm: Arm B
   # subject_code:
   # randomized_at:
+  # user:
+

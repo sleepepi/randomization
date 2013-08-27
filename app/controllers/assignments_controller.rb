@@ -83,11 +83,11 @@ class AssignmentsController < ApplicationController
       empty_response_or_root_path(project_assignments_path(@project)) unless @assignment
     end
 
-    def assignment_params
-      params[:assignment] ||= {}
-      params.require(:assignment).permit(
-        # :project_id, :list_name, :block_group, :multiplier, :position, :treatment_arm, :subject_code, :randomized_at
-      )
-    end
+    # def assignment_params
+    #   params[:assignment] ||= {}
+    #   params.require(:assignment).permit(
+    #     # :project_id, :list_name, :block_group, :multiplier, :position, :treatment_arm, :subject_code, :randomized_at
+    #   )
+    # end
 
 end

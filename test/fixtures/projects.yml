@@ -3,14 +3,25 @@
 
 one:
   name: MyString
-  description: MyText
+  description: This is my description of a project with 2 treatment arms and 4 lists.
   user: valid
   config: {
             treatment_arms: [
               { name: 'Arm A', allocation: 1 },
               { name: 'Arm B', allocation: 1 }
+            ],
+            stratification_factors: [
+              { name: 'Site', options: [ 'BOS', 'CLE' ] },
+              { name: 'Gender', options: [ 'Male', 'Female' ] }
+            ],
+            block_size_multipliers: [
+              { value: '1', allocation: '2' },
+              { value: '2', allocation: '1' },
+              { value: '3', allocation: '1' },
+              { value: '4', allocation: '0' }
             ]
           }
+  randomization_goal: 80
 
 two:
   name: MyString
@@ -26,3 +37,25 @@ four:
   name: Project four
   # description:
   user: valid
+  config: {
+            treatment_arms: [
+              { name: 'A', allocation: 1 },
+              { name: 'B', allocation: 2 },
+              { name: 'C', allocation: 2 }
+            ],
+            stratification_factors: [
+              { name: 'Gender', options: [ 'Male', 'Female' ] }
+            ],
+            block_size_multipliers: [
+              { value: '1', allocation: '2' },
+              { value: '2', allocation: '1' },
+              { value: '3', allocation: '1' },
+              { value: '4', allocation: '0' }
+            ]
+          }
+  randomization_goal: 80
+
+empty:
+  name: Empty
+  user: valid
+  randomization_goal: 80

@@ -37,3 +37,10 @@ invited:
   editor: true
   invite_token: abc123
   invite_email: invited_user@example.com
+
+viewer:
+  project: one
+  user: viewer
+  editor: false
+  creator: valid
+

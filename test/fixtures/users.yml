@@ -45,3 +45,12 @@ deleted:
   system_admin: false
   email: deleted@example.com
   encrypted_password: ""
+
+viewer:
+  first_name: Viewer
+  last_name: Viewer
+  status: active
+  deleted: false
+  system_admin: false
+  email: viewer@example.com
+  encrypted_password: ""
