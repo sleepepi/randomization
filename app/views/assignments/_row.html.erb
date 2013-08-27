@@ -1,0 +1,11 @@
+<td><%= link_to assignment.list_name, [@project, assignment] %></td>
+<td><%= assignment.position %></td>
+<td><%= assignment.treatment_arm %></td>
+<td><%= assignment.subject_code %></td>
+<td><%= simple_time assignment.randomized_at %></td>
+<td><%= link_to assignment.user.name, assignment.user if assignment.user %></td>
+<td>
+  <%= link_to "Undo Randomization", project_assignment_path(@project, assignment, replace_row: '1'), method: :delete, remote: true, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to remove subject from Assignment #{assignment.list_name}?" } unless assignment.subject_code.blank? %>
+  <%#= link_to 'Edit', edit_project_assignment_path(@project, assignment), class: 'btn btn-xs btn-default' %>
+  <%#= link_to 'Delete', [@project, assignment], method: :delete, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to delete Assignment #{assignment.name}?" } %>
+</td>

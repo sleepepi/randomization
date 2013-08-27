@@ -1,1 +1,5 @@
-$("#assignment_<%= @assignment.id %>").hide('fade');
+<% if params[:replace_row] == '1' %>
+  $("#assignment_<%= @assignment.id %>").html("<%= escape_javascript( render partial: "assignments/row", locals: { assignment: @assignment } ) %>");
+<% else %>
+  $("#assignment_<%= @assignment.id %>").hide('fade');
+<% end %>

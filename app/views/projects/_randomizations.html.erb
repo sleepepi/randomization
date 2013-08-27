@@ -8,6 +8,7 @@
       <th style="white-space:nowrap"><%== sort_field_helper(@order, 'assignments.treatment_arm', 'Treatment Arm', 'assignments_search') %></th>
       <th style="white-space:nowrap"><%== sort_field_helper(@order, 'assignments.subject_code', 'Subject Code', 'assignments_search') %></th>
       <th style="white-space:nowrap"><%== sort_field_helper(@order, 'assignments.randomized_at', 'Randomized At', 'assignments_search') %></th>
+      <th style="white-space:nowrap"><%== sort_field_helper(@order, 'assignments.user_id', 'Randomized By', 'assignments_search') %></th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -19,6 +20,7 @@
       <td><%= assignment.treatment_arm %></td>
       <td><%= assignment.subject_code %></td>
       <td><%= simple_time assignment.randomized_at %></td>
+      <td><%= link_to assignment.user.name, assignment.user if assignment.user %></td>
       <td>
         <%= link_to "Undo Randomization", [@project, assignment], method: :delete, remote: true, class: 'btn btn-xs btn-danger-inverse', data: { confirm: "Are you sure you want to remove subject from Assignment #{assignment.list_name}?" } unless assignment.subject_code.blank? %>
         <%#= link_to 'Edit', edit_project_assignment_path(@project, assignment), class: 'btn btn-xs btn-default' %>
