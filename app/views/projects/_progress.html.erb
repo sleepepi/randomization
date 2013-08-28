@@ -1,0 +1,9 @@
+<% if project.randomizations.count > 0 and project.randomization_goal > 0 %>
+  <% percent = [project.randomizations.count * 100 / project.randomization_goal, 100].min %>
+  <% status = "danger" %>
+  <% status = "warning" if percent >= 33 %>
+  <% status = "success" if percent == 100 %>
+  <div class="progress progress-striped">
+    <div class="progress-bar progress-bar-<%= status %>" style="width: <%= percent %>%;"><%= percent %>%</div>
+  </div>
+<% end %>

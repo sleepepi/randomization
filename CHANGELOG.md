@@ -18,6 +18,7 @@
   - Emails are sent when subjects are randomized
   - Randomizations now show the randomization number of the total randomization goal
   - Number of subjects per treatment arm are listed on project show page
+  - Projects display the overall progress towards the randomization goal
 
 ## 0.0.0 (August 21, 2013)
 

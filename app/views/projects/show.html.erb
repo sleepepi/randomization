@@ -68,7 +68,7 @@
   </dd>
 
   <dt>Randomization Goal</dt>
-  <dd><%= @project.randomization_goal %></dd>
+  <dd><%= @project.randomizations.count %> of <%= @project.randomization_goal %></dd>
 
 <% if @project.editable_by?(current_user) %>
   <dt>Number of Lists</dt>
