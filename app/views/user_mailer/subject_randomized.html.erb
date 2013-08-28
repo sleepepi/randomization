@@ -2,7 +2,7 @@ Hello <%= @user.first_name %>,<br />
 <br />
 <%= @assignment.user.name %> has randomized subject <%= @assignment.subject_code %> to <%= @assignment.treatment_arm %> on <%= link_to @assignment.project.name, "#{SITE_URL}/projects/#{@assignment.project.id}" %>.<br />
 <br />
-<%= link_to "View Randomization ##{@assignment.randomization_number} of #{@assignment.project.randomization_goal}", "#{SITE_URL}/projects/assignments/#{@assignment.id}" %>
+<%= link_to "View Randomization ##{@assignment.randomization_number} of #{@assignment.project.randomization_goal}", "#{SITE_URL}/projects/#{@assignment.project.id}/assignments/#{@assignment.id}" %>
 <br />
 <br />
 <br />

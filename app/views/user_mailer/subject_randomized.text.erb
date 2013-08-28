@@ -4,7 +4,7 @@ Hello <%= @user.first_name %>,
 
 View Randomization #<%= @assignment.randomization_number %> of <%= @assignment.project.randomization_goal %>.
 
-    <%= "#{SITE_URL}/projects/assignments/#{@assignment.id}" %>
+    <%= "#{SITE_URL}/projects/#{@assignment.project.id}/assignments/#{@assignment.id}" %>
 
 
 Thank you!
