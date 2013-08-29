@@ -24,7 +24,7 @@
   <b><%= @relation.humanize %></b>
 <% end %>
 
-<div class="col-md-10 col-md-offset-2">
+<div class="col-md-offset-2 col-md-10">
   <ul class="list-unstyled">
   <% @project.project_users.where(editor: @relation == 'editors').each do |project_user| %>
     <li onmouseover="$('#project_user_<%= project_user.id %>_delete').show();" onmouseout="$('#project_user_<%= project_user.id %>_delete').hide();" style="line-height:30px">
