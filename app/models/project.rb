@@ -119,6 +119,33 @@ class Project < ActiveRecord::Base
     assignment
   end
 
+  def generate_lists!
+    return if self.randomizations.size > 0
+    self.assignments.destroy_all
+    block_group = self.get_block_group
+    self.lists.each do |list|
+      block_ordering = []
+      (1..self.block_groups_per_list).each do
+        block_ordering << block_group.shuffle
+      end
+      entry_index = 0
+      block_ordering.each_with_index do |multipliers, index|
+        multipliers.each do |multiplier|
+          self.get_block(multiplier).shuffle.each do |arm|
+            entry_index += 1
+            self.assignments.create(
+              list_name: list.join(', '),
+              position: entry_index,
+              treatment_arm: arm,
+              block_group: index,
+              multiplier: multiplier
+            )
+          end
+        end
+      end
+    end
+  end
+
   def randomizations
     self.assignments.where( "subject_code IS NOT NULL" )
   end

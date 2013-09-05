@@ -36,30 +36,7 @@ class ProjectsController < ApplicationController
 
   # POST /projects/1/generate_lists.js
   def generate_lists
-    @project.assignments.destroy_all
-
-    block_group = @project.get_block_group
-    @project.lists.each do |list|
-      block_ordering = []
-      (1..@project.block_groups_per_list).each do
-        block_ordering << block_group.shuffle
-      end
-      entry_index = 0
-      block_ordering.each_with_index do |multipliers, index|
-        multipliers.each do |multiplier|
-          @project.get_block(multiplier).shuffle.each do |arm|
-            entry_index += 1
-            @project.assignments.create(
-              list_name: list.join(', '),
-              position: entry_index,
-              treatment_arm: arm,
-              block_group: index,
-              multiplier: multiplier
-            )
-          end
-        end
-      end
-    end
+    @project.generate_lists!
   end
 
   # GET /projects

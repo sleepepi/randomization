@@ -76,8 +76,21 @@ class ProjectsControllerTest < ActionController::TestCase
     assert_template 'randomize_subject'
   end
 
+  # 7 Minimum Block Group Size = ( 1x Block Size 3 + 1x Block Size 2 + 2x Block Size 1 )
+  # 35 Minimum Block Size = 5 Treatment Options ( 1 of A + 2 of B + 2 of C ) * 7 Minimum Block Group Size
+  # 105 Blocks Per List = 3 (# of Block Groups of size 35 required to cover Randomization Goal of 80) * 35 Minimum Block Size
+  # 210 Assignments = 2 Lists (Gender Male, Gender Female) * ( 105 Blocks Per List )
   test "should generate lists" do
-    post :generate_lists, id: @project, format: 'js'
+    assert_difference('Assignment.count', 210) do
+      post :generate_lists, id: projects(:four), format: 'js'
+    end
+    assert_response :success
+  end
+
+  test "should not generate lists if randomization has started" do
+    assert_difference('Assignment.count', 0) do
+      post :generate_lists, id: @project, format: 'js'
+    end
     assert_response :success
   end
 
