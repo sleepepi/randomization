@@ -10,6 +10,7 @@
   - Updated to simplecov 0.8.2
   - Updated to pg 0.17.0
 - Turbolinks enabled
+- Removed support for Ruby 1.9.3
 
 ## 0.1.0 (September 5, 2013)
 
