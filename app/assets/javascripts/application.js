@@ -11,5 +11,5 @@
 // about supported directives.
 //
 //= require contour
-// require turbolinks
+//= require turbolinks
 //= require_tree .
