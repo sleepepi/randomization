@@ -41,6 +41,5 @@ class NavigationTest < ActionDispatch::IntegrationTest
 
     sign_in_as(@valid, "123456", "valid-2@example.com")
     assert_equal '/projects', path
-    assert_equal I18n.t('devise.sessions.signed_in'), flash[:notice]
   end
 end
