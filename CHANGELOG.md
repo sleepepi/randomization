@@ -5,6 +5,7 @@
 - **Gem Changes**
   - Updated to pg 0.17.1
   - Updated to jbuilder 2.0
+  - Updated to contour 2.2.1
 
 ## 0.1.2 (December 5, 2013)
 
