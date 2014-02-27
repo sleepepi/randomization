@@ -10,7 +10,7 @@ class AssignmentsController < ApplicationController
   # GET /assignments.json
   def index
     @order = scrub_order(Assignment, params[:order], "assignments.randomized_at, assignments.id")
-    @assignments = @project.assignments.order(@order).page(params[:page]).per( 20 )
+    @assignments = @project.assignments.order(@order).page(params[:page]).per( 40 )
   end
 
   # GET /assignments/1

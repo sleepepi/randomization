@@ -1,6 +1,7 @@
 ## 0.1.4
 
 ### Enhancements
+- Minor GUI changes and fixes for JavaScript and Turbolinks
 - Use of Ruby 2.1.1 is now recommended
 - **Gem Changes**
   - Updated to rails 4.0.3

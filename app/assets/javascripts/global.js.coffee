@@ -1,10 +1,13 @@
+@setFocusToField = (element_id) ->
+  val = $(element_id).val()
+  $(element_id).focus().val('').val(val)
+
 @ready = () ->
   contourReady()
-  $(document).off("click", ".pagination a, .page a, .next a, .prev a")
-  $(document).off("click", ".per_page a")
   window.$isDirty = false
   msg = "You haven't saved your changes."
   window.onbeforeunload = (el) -> return msg if window.$isDirty
+  setFocusToField("#search")
 
 $(document).ready(ready)
 $(document)

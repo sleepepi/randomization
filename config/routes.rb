@@ -34,6 +34,7 @@ Randomization::Application.routes.draw do
     end
   end
 
+  get "/about" => "application#about", as: :about
   get "/settings" => "users#settings", as: :settings
 
   root 'projects#index'

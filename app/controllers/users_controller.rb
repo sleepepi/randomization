@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     end
 
     @order = scrub_order(User, params[:order], 'users.current_sign_in_at DESC')
-    @users = User.current.search(params[:search]).order(@order).page(params[:page]).per( 20 )
+    @users = User.current.search(params[:search]).order(@order).page(params[:page]).per( 40 )
 
     respond_to do |format|
       format.html

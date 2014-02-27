@@ -24,14 +24,13 @@ Contour.setup do |config|
     },
     {
       name: 'image_tag(current_user.avatar_url(18, "blank"))+" "+current_user.name', eval: true, display: 'signed_in', path: 'settings_path', position: 'right',
-      links: [{ header: "Randomization v#{Randomization::VERSION::STRING}" },
+      links: [{ name: "About Randomization v#{Randomization::VERSION::STRING}", path: 'about_path' },
               { divider: true },
               { header: 'Administrative', condition: 'current_user.system_admin?' },
               { name: 'Users', path: 'users_path', condition: 'current_user.system_admin?' },
               { divider: true, condition: 'current_user.system_admin?' },
               { header: 'current_user.email', eval: true },
               { html: 'Settings', path: 'settings_path' },
-              { name: 'Authentications', path: 'authentications_path', condition: 'not PROVIDERS.blank?' },
               { divider: true },
               { name: 'Logout', path: 'destroy_user_session_path' }]
     },

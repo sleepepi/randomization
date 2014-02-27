@@ -44,7 +44,7 @@ class ProjectsController < ApplicationController
   def index
     flash.delete(:notice)
     @order = scrub_order(Project, params[:order], "projects.name")
-    @projects = current_user.all_viewable_projects.search(params[:search]).order(@order).page(params[:page]).per( 20 )
+    @projects = current_user.all_viewable_projects.search(params[:search]).order(@order).page(params[:page]).per( 40 )
   end
 
   # GET /projects/1
