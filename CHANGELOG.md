@@ -1,4 +1,4 @@
-## 0.1.4
+## 0.1.4 (February 27, 2014)
 
 ### Enhancements
 - Minor GUI changes and fixes for JavaScript and Turbolinks
