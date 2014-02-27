@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails',                '4.0.2'
+gem 'rails',                '4.0.3'
 
 # Database Adapter
 gem 'pg',                   '0.17.1'
@@ -8,8 +8,8 @@ gem 'thin',                 '~> 1.5.0',           platforms: [ :mswin, :mingw ]
 gem 'eventmachine',         '~> 1.0.0',           platforms: [ :mswin, :mingw ]
 
 # Gems used by project
-gem 'contour',              '~> 2.2.1'
-gem 'kaminari',             '~> 0.15.0'
+gem 'contour',              '2.4.0.beta3'
+gem 'kaminari',             '~> 0.15.1'
 gem 'ruby-ntlm-namespace',  '~> 0.0.1'
 gem 'redcarpet',            '~> 3.0.0'
 
