@@ -60,7 +60,7 @@ class UserMailerTest < ActionMailer::TestCase
 
     assert_equal [user.email], email.to
     assert_equal "#{assignment.user.name} Randomized A Subject to #{assignment.treatment_arm} on #{assignment.project.name}", email.subject
-    assert_match(/#{assignment.user.name} randomized subject #{assignment.subject_code} to #{assignment.treatment_arm} on #{assignment.project.name} located here/, email.encoded)
+    assert_match(/#{assignment.subject_code} was randomized to #{assignment.treatment_arm} on #{assignment.project.name} by #{assignment.user.name}\./, email.encoded)
   end
 
 end
