@@ -1,6 +1,6 @@
 Dear <%= @user.first_name %>,
 
-<%= @assignment.user.name %> randomized subject <%= @assignment.subject_code %> to <%= @assignment.treatment_arm %> on <%= @assignment.project.name %> located here <%= "#{SITE_URL}/projects/#{@assignment.project.id}" %>.
+<%= @assignment.subject_code %> was randomized to <%= @assignment.treatment_arm %> on <%= @assignment.project.name %> by <%= @assignment.user.name %>.
 
 View Randomization #<%= @assignment.randomization_number %> of <%= @assignment.project.randomization_goal %>.
 

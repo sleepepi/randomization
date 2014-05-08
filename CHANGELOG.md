@@ -1,5 +1,9 @@
 ## 0.1.6
 
+### Enhancments
+- **General Changes**
+  - Slight modifications to subject randomized email notifications
+
 ## 0.1.5 (May 8, 2014)
 
 ### Enhancements
