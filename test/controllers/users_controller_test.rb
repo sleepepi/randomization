@@ -36,7 +36,7 @@ class UsersControllerTest < ActionController::TestCase
   end
 
   test "should get index with pagination" do
-    get :index, format: 'js'
+    xhr :get, :index, format: 'js'
     assert_not_nil assigns(:users)
     assert_template 'index'
   end

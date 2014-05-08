@@ -1,10 +1,10 @@
 # Randomization
 
-[![Build Status](https://travis-ci.org/sleepepi/randomization.png?branch=master)](https://travis-ci.org/sleepepi/randomization)
-[![Dependency Status](https://gemnasium.com/sleepepi/randomization.png)](https://gemnasium.com/sleepepi/randomization)
+[![Build Status](https://travis-ci.org/sleepepi/randomization.svg?branch=master)](https://travis-ci.org/sleepepi/randomization)
+[![Dependency Status](https://gemnasium.com/sleepepi/randomization.svg)](https://gemnasium.com/sleepepi/randomization)
 [![Code Climate](https://codeclimate.com/github/sleepepi/randomization.png)](https://codeclimate.com/github/sleepepi/randomization)
 
-Randomization is a small web application designed to aid in Permuted-block randomization. Using Rails 4.0+ and Ruby 2.1.1+.
+Randomization is a small web application designed to aid in Permuted-block randomization. Using Rails 4.1+ and Ruby 2.1.1+.
 
 ## Installation
 
