@@ -19,7 +19,7 @@ class ProjectsController < ApplicationController
     stratum_keys = params.keys.select{|key| key =~ /^stratum_[\d]*$/}
     values = params.each.select{|key, value| stratum_keys.include?(key)}.collect{|k,v| v}.compact
 
-    if @assignment = @project.create_randomization!(params[:subject_code], values, current_user)
+    if @assignment = @project.create_randomization!(params[:subject_code], values, current_user, params[:attested].to_i == 1)
       redirect_to [@project, @assignment], notice: "Subject successfully randomized to <b>#{@assignment.treatment_arm}</b>.".html_safe
     else
       render action: 'randomize_subject'
@@ -126,6 +126,7 @@ class ProjectsController < ApplicationController
         :name,
         :description,
         :randomization_goal,
+        :randomization_requirements,
         { treatment_arms: [ :name, :allocation ] },
         { stratification_factors: [ :name, options: [] ] },
         { block_size_multipliers: [ :value, :allocation ] }

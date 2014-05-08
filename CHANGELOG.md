@@ -3,6 +3,8 @@
 ### Enhancments
 - **General Changes**
   - Slight modifications to subject randomized email notifications
+- **Subject Randomization**
+  - Users must now attest to the correctness of the randomization when the randomization is created
 
 ## 0.1.5 (May 8, 2014)
 

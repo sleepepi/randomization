@@ -37,6 +37,13 @@
   </div>
 
   <div class="form-group">
+    <%= f.label :randomization_requirements, nil, class: 'col-md-2 control-label' %>
+    <div class="col-md-10">
+      <%= f.text_area :randomization_requirements, rows: 7, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-group">
     <label class="col-md-2 control-label">Treatment Arms</label>
     <div class="col-md-10">
       <div id="treatment_arms">

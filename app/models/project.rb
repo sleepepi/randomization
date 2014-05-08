@@ -91,7 +91,7 @@ class Project < ActiveRecord::Base
     self.stratification_factors.collect{|stratum| (stratum[:options] || []).size}.inject(:*).to_i
   end
 
-  def create_randomization!(subject_code, values, current_user)
+  def create_randomization!(subject_code, values, current_user, attested)
     list_name = values.join(', ')
     if subject_code.blank?
       self.errors.add(:subject_code, "can't be blank")
@@ -105,12 +105,15 @@ class Project < ActiveRecord::Base
     elsif self.assignments.where( list_name: list_name, subject_code: nil ).size == 0
       self.errors.add(:list, "#{list_name} is already full")
     end
+    unless attested
+      self.errors.add(:attested, "must be checked")
+    end
 
     return nil if self.errors.size > 0
 
     assignment = self.assignments.where( list_name: list_name, subject_code: nil ).first
     if assignment
-      assignment.update( subject_code: subject_code, randomized_at: Time.now, user_id: current_user.id )
+      assignment.update( subject_code: subject_code, randomized_at: Time.now, user_id: current_user.id, attested: attested )
       users_to_email = (self.users + [self.user] - [current_user]).uniq
       users_to_email.each do |user_to_email|
         UserMailer.subject_randomized(assignment, user_to_email).deliver if Rails.env.production? and user_to_email.email_on?(:send_email)
