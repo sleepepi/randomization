@@ -5,6 +5,7 @@
   - Slight modifications to subject randomized email notifications
 - **Subject Randomization**
   - Users must now attest to the correctness of the randomization when the randomization is created
+  - Subject randomized emails are now also sent to the user who entered the randomization
 
 ## 0.1.5 (May 8, 2014)
 
