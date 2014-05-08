@@ -44,7 +44,7 @@
       <%= label_tag :attested, "<span class='glyphicon glyphicon-leaf' style='color:#5cb85c'></span> Attestation".html_safe, class: 'col-md-2 control-label' %>
       <div class="col-md-10" style="padding-left: 20px;display: block;min-height: 27px;padding-top: 7px;">
         <%= check_box_tag :attested, '1', false, style: 'float: left;margin-left: -20px;' %>
-        <%= @project.randomization_requirements.blank? ? "By checking this box I attest that I have personally entered all of the available data recorded and reviewed for completeness and accuracy. All information entered by me is correct to the best of my knowledge." : simple_markdown(@project.randomization_requirements) %></div>
+        <%= @project.randomization_requirements.blank? ? "By checking this box I attest that I have personally entered all of the available data recorded and reviewed for completeness and accuracy. All information entered by me is correct to the best of my knowledge." : simple_markdown(@project.randomization_requirements) %>
       </div>
     </div>
   </div>
