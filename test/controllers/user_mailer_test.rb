@@ -13,7 +13,7 @@ class UserMailerTest < ActionMailer::TestCase
     # Test the body of the sent email contains what we expect it to
     assert_equal [admin.email], email.to
     assert_equal "#{valid.name} Signed Up", email.subject
-    assert_match(/#{valid.name} \[#{valid.email}\] has signed up for an account\./, email.encoded)
+    assert_match(/#{valid.name} \[#{valid.email}\] signed up for an account\./, email.encoded)
   end
 
   test "status activated email" do
@@ -37,7 +37,7 @@ class UserMailerTest < ActionMailer::TestCase
 
     assert_equal [project_user.user.email], email.to
     assert_equal "#{project_user.creator.name} Allows You to View Project #{project_user.project.name}", email.subject
-    assert_match(/#{project_user.creator.name} has added you to Project #{project_user.project.name}/, email.encoded)
+    assert_match(/#{project_user.creator.name} added you to Project #{project_user.project.name}/, email.encoded)
   end
 
   test "user invited to project email" do
@@ -48,7 +48,7 @@ class UserMailerTest < ActionMailer::TestCase
 
     assert_equal [project_user.invite_email], email.to
     assert_equal "#{project_user.creator.name} Invites You to View Project #{project_user.project.name}", email.subject
-    assert_match(/#{project_user.creator.name} has invited you to Project #{project_user.project.name}/, email.encoded)
+    assert_match(/#{project_user.creator.name} invited you to Project #{project_user.project.name}/, email.encoded)
   end
 
   test "subject randomization" do
@@ -60,7 +60,7 @@ class UserMailerTest < ActionMailer::TestCase
 
     assert_equal [user.email], email.to
     assert_equal "#{assignment.user.name} Randomized A Subject to #{assignment.treatment_arm} on #{assignment.project.name}", email.subject
-    assert_match(/#{assignment.user.name} has randomized subject #{assignment.subject_code} to #{assignment.treatment_arm} on #{assignment.project.name} located here/, email.encoded)
+    assert_match(/#{assignment.user.name} randomized subject #{assignment.subject_code} to #{assignment.treatment_arm} on #{assignment.project.name} located here/, email.encoded)
   end
 
 end

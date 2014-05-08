@@ -6,6 +6,7 @@ class UserMailer < ActionMailer::Base
     setup_email
     @system_admin = system_admin
     @user = user
+    @email_to = system_admin.email
     mail(to: system_admin.email,
          subject: "#{user.name} Signed Up",
          reply_to: user.email)
@@ -14,6 +15,7 @@ class UserMailer < ActionMailer::Base
   def status_activated(user)
     setup_email
     @user = user
+    @email_to = user.email
     mail(to: user.email,
          subject: "#{user.name}'s Account Activated")
   end
@@ -21,6 +23,7 @@ class UserMailer < ActionMailer::Base
   def user_added_to_project(project_user)
     setup_email
     @project_user = project_user
+    @email_to = project_user.user.email
     mail(to: project_user.user.email,
          subject: "#{project_user.creator.name} Allows You to View Project #{project_user.project.name}",
          reply_to: project_user.creator.email)
@@ -29,6 +32,7 @@ class UserMailer < ActionMailer::Base
   def invite_user_to_project(project_user)
     setup_email
     @project_user = project_user
+    @email_to = project_user.invite_email
     mail(to: project_user.invite_email,
          subject: "#{project_user.creator.name} Invites You to View Project #{project_user.project.name}",
          reply_to: project_user.creator.email)
@@ -38,6 +42,7 @@ class UserMailer < ActionMailer::Base
     setup_email
     @assignment = assignment
     @user = user
+    @email_to = user.email
     mail(to: user.email,
          subject: "#{assignment.user.name} Randomized A Subject to #{assignment.treatment_arm} on #{assignment.project.name}",
          reply_to: assignment.user.email)

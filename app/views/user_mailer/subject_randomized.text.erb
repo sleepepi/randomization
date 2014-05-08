@@ -1,6 +1,6 @@
-Hello <%= @user.first_name %>,
+Dear <%= @user.first_name %>,
 
-<%= @assignment.user.name %> has randomized subject <%= @assignment.subject_code %> to <%= @assignment.treatment_arm %> on <%= @assignment.project.name %> located here <%= "#{SITE_URL}/projects/#{@assignment.project.id}" %>.
+<%= @assignment.user.name %> randomized subject <%= @assignment.subject_code %> to <%= @assignment.treatment_arm %> on <%= @assignment.project.name %> located here <%= "#{SITE_URL}/projects/#{@assignment.project.id}" %>.
 
 View Randomization #<%= @assignment.randomization_number %> of <%= @assignment.project.randomization_goal %>.
 
@@ -11,4 +11,4 @@ Thank you!
 
 <%= DEFAULT_APP_NAME %> Mailer
 
-<%= @footer_html %>
+<%= @footer_txt %>
