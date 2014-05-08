@@ -1,5 +1,8 @@
 ## 0.1.7
 
+### Bug Fix
+- Fixed minor styling issue with `Randomize!` button
+
 ## 0.1.6 (May 8, 2014)
 
 ### Enhancments
