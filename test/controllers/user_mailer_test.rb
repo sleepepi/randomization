@@ -7,7 +7,7 @@ class UserMailerTest < ActionMailer::TestCase
     admin = users(:admin)
 
     # Send the email, then test that it got queued
-    email = UserMailer.notify_system_admin(admin, valid).deliver
+    email = UserMailer.notify_system_admin(admin, valid).deliver_now
     assert !ActionMailer::Base.deliveries.empty?
 
     # Test the body of the sent email contains what we expect it to
@@ -20,7 +20,7 @@ class UserMailerTest < ActionMailer::TestCase
     valid = users(:valid)
 
     # Send the email, then test that it got queued
-    email = UserMailer.status_activated(valid).deliver
+    email = UserMailer.status_activated(valid).deliver_now
     assert !ActionMailer::Base.deliveries.empty?
 
     # Test the body of the sent email contains what we expect it to
@@ -32,7 +32,7 @@ class UserMailerTest < ActionMailer::TestCase
   test "user added to project email" do
     project_user = project_users(:one)
 
-    email = UserMailer.user_added_to_project(project_user).deliver
+    email = UserMailer.user_added_to_project(project_user).deliver_now
     assert !ActionMailer::Base.deliveries.empty?
 
     assert_equal [project_user.user.email], email.to
@@ -43,7 +43,7 @@ class UserMailerTest < ActionMailer::TestCase
   test "user invited to project email" do
     project_user = project_users(:invited)
 
-    email = UserMailer.invite_user_to_project(project_user).deliver
+    email = UserMailer.invite_user_to_project(project_user).deliver_now
     assert !ActionMailer::Base.deliveries.empty?
 
     assert_equal [project_user.invite_email], email.to
@@ -55,7 +55,7 @@ class UserMailerTest < ActionMailer::TestCase
     assignment = assignments(:one)
     user = users(:valid)
 
-    email = UserMailer.subject_randomized(assignment, user).deliver
+    email = UserMailer.subject_randomized(assignment, user).deliver_now
     assert !ActionMailer::Base.deliveries.empty?
 
     assert_equal [user.email], email.to

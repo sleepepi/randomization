@@ -116,7 +116,7 @@ class Project < ActiveRecord::Base
       assignment.update( subject_code: subject_code, randomized_at: Time.now, user_id: current_user.id, attested: attested )
       users_to_email = (self.users + [self.user]).uniq
       users_to_email.each do |user_to_email|
-        UserMailer.subject_randomized(assignment, user_to_email).deliver if Rails.env.production? and user_to_email.email_on?(:send_email)
+        UserMailer.subject_randomized(assignment, user_to_email).deliver_later if Rails.env.production? and user_to_email.email_on?(:send_email)
       end
     end
     assignment

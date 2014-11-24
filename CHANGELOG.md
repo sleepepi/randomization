@@ -1,6 +1,12 @@
 ## 0.1.9
 
 ### Enhancements
+- **Gem Changes**
+  - Updated to rails 4.2.0.beta4
+  - Updated to contour 2.6.0.beta8
+  - Updated to kaminari 0.16.1
+  - Updated to redcarpet 3.2.0
+  - Updated to simplecov 0.9.0
 - Use of Ruby 2.1.5 is now recommended
 
 ## 0.1.8 (May 29, 2014)
