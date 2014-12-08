@@ -1,5 +1,10 @@
 ## 0.2.0
 
+### Enhancements
+- **Gem Changes**
+  - Updated to rails 4.2.0.rc2
+  - Updated to simplecov 0.9.1
+
 ## 0.1.9 (November 24, 2014)
 
 ### Enhancements
