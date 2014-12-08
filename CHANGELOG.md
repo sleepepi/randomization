@@ -1,4 +1,4 @@
-## 0.2.0
+## 0.2.0 (December 8, 2014)
 
 ### Enhancements
 - The randomizations index page can now be exported to CSV
