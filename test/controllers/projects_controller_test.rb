@@ -6,6 +6,12 @@ class ProjectsControllerTest < ActionController::TestCase
     @project = projects(:one)
   end
 
+  test "should get csv" do
+    get :randomizations, id: @project, format: 'csv'
+    assert_not_nil assigns(:csv_string)
+    assert_response :success
+  end
+
   test "should get randomizations for viewer" do
     login(users(:viewer))
     get :randomizations, id: @project

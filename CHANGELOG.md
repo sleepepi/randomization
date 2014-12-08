@@ -1,6 +1,7 @@
 ## 0.2.0
 
 ### Enhancements
+- The randomizations index page can now be exported to CSV
 - **Gem Changes**
   - Updated to rails 4.2.0.rc2
   - Updated to simplecov 0.9.1

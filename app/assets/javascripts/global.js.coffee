@@ -24,3 +24,7 @@ $(document)
   .on('change', ':input', () ->
     window.$isDirty = true if $("#isdirty").val() == '1'
   )
+  .on('click', '[data-object~="export"]', () ->
+    window.location = $($(this).data('target')).attr('action') + '.' + $(this).data('format') + '?' + $($(this).data('target')).serialize()
+    false
+  )

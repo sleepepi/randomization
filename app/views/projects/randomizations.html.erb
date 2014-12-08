@@ -6,10 +6,11 @@
   </h1>
 </div>
 
-<%= form_tag randomizations_project_path(@project), method: :get, class: 'form-inline' do %>
+<%= form_tag randomizations_project_path(@project), method: :get, class: 'form-inline', id: 'assignments_search' do %>
   <%= hidden_field_tag :order, params[:order] %>
   <%= text_field_tag 'search', params[:search], class: 'form-control' %>
   <%= submit_tag 'Search', class: 'btn btn-primary', name: nil %>
+  <%= link_to 'Export', '#', class: 'btn btn-default', data: { object: 'export', format: 'csv', target: '#assignments_search' } %>
   <%= link_to 'Reset', randomizations_project_path(@project), class: 'btn btn-default' %>
 <% end %>
 

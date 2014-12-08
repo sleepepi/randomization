@@ -7,7 +7,14 @@ class ProjectsController < ApplicationController
   # GET /projcets/1/randomizations
   def randomizations
     @order = scrub_order(Assignment, params[:order], "assignments.randomized_at DESC")
-    @assignments = @project.randomizations.order(@order).page(params[:page]).per( 40 )
+    assignment_scope = @project.randomizations.order(@order)
+
+    if params[:format] == 'csv'
+      generate_csv(assignment_scope)
+      return
+    end
+
+    @assignments = assignment_scope.page(params[:page]).per( 40 )
   end
 
   # GET /projects/1/randomize_subject
@@ -132,4 +139,25 @@ class ProjectsController < ApplicationController
         { block_size_multipliers: [ :value, :allocation ] }
       )
     end
+
+    def generate_csv(assignment_scope)
+      @csv_string = CSV.generate do |csv|
+        csv << [ 'Subject Code', 'List Name', 'Randomized At', 'Randomized By', 'Treatment Arm' ]
+
+        assignment_scope.each do |a|
+          row = [
+            a.subject_code,
+            a.list_name,
+            a.randomized_at,
+            (a.user ? a.user.name : ''),
+            a.treatment_arm
+          ]
+          csv << row
+        end
+      end
+
+      send_data @csv_string, type: 'text/csv; charset=iso-8859-1; header=present',
+                             disposition: "attachment; filename=\"Randomizations - #{@project.name.gsub(/[^\w]/, '_')} - #{Time.now.strftime("%Y.%m.%d %Ih%M %p")}.csv\""
+    end
+
 end
