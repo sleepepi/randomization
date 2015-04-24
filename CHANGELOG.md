@@ -11,6 +11,7 @@
   - Updated to pg 0.18.1
   - Updated to kaminari 0.16.3
   - Updated to redcarpet 3.2.3
+  - Updated to simplecov 0.10.0
 
 ## 0.2.0 (December 8, 2014)
 
