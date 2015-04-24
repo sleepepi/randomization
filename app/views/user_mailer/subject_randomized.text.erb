@@ -4,11 +4,11 @@ Dear <%= @user.first_name %>,
 
 View Randomization #<%= @assignment.randomization_number %> of <%= @assignment.project.randomization_goal %>.
 
-    <%= "#{SITE_URL}/projects/#{@assignment.project.id}/assignments/#{@assignment.id}" %>
+    <%= "#{ENV['website_url']}/projects/#{@assignment.project.id}/assignments/#{@assignment.id}" %>
 
 
 Thank you!
 
-<%= DEFAULT_APP_NAME %> Mailer
+<%= ENV['website_name'] %> Mailer
 
 <%= @footer_txt %>

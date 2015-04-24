@@ -1,14 +1,13 @@
-postgres
-
-
-
+http://localhost
+Randomization
+support@example.com
 localhost
 25
+plain
+smtp@example.com
+smtp_username
+smtp_password
+postgres
 
-travis-ci@example.com
-
-
-Randomization
-http://localhost
 
 

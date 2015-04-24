@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   STATUS = ["active", "denied", "inactive", "pending"].collect{|i| [i,i]}
 
   # Concerns
-  include Contourable, Deletable
+  include Deletable
 
   # Named Scopes
   scope :current, -> { where deleted: false }
@@ -63,14 +63,6 @@ class User < ActiveRecord::Base
   # Overriding Devise built-in active_for_authentication? method
   def active_for_authentication?
     super and self.status == 'active' and not self.deleted?
-  end
-
-  def apply_omniauth(omniauth)
-    unless omniauth['info'].blank?
-      self.first_name = omniauth['info']['first_name'] if first_name.blank?
-      self.last_name = omniauth['info']['last_name'] if last_name.blank?
-    end
-    super
   end
 
   def destroy
