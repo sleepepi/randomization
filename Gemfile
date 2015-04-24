@@ -9,7 +9,7 @@ gem 'pg',                   '0.18.1'
 gem 'contour',              '~> 3.0.0.beta1'
 gem 'kaminari',             '~> 0.16.3'
 gem 'ruby-ntlm-namespace',  '~> 0.0.1'
-gem 'redcarpet',            '~> 3.2.0'
+gem 'redcarpet',            '~> 3.2.3'
 gem 'figaro',               '~> 1.1.0'
 
 # Rails Defaults
