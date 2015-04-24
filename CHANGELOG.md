@@ -16,6 +16,9 @@
   - Updated to simplecov 0.10.0
   - Removed dependency on ruby-ntlm gem
 
+### Bug Fix
+- Fixed an issue where a flash message contained escaped HTML markup
+
 ## 0.2.0 (December 8, 2014)
 
 ### Enhancements

@@ -27,7 +27,7 @@ class ProjectsController < ApplicationController
     values = params.each.select{|key, value| stratum_keys.include?(key)}.collect{|k,v| v}.compact
 
     if @assignment = @project.create_randomization!(params[:subject_code], values, current_user, params[:attested].to_i == 1)
-      redirect_to [@project, @assignment], notice: "Subject successfully randomized to <b>#{@assignment.treatment_arm}</b>.".html_safe
+      redirect_to [@project, @assignment], notice: "Subject successfully randomized to #{@assignment.treatment_arm}.".html_safe
     else
       render action: 'randomize_subject'
     end
