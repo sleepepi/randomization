@@ -60,4 +60,4 @@ All done!
 
 ## Copyright [![Creative Commons 3.0](http://i.creativecommons.org/l/by-nc-sa/3.0/80x15.png)](http://creativecommons.org/licenses/by-nc-sa/3.0)
 
-Copyright (c) 2014 Division of Medicine Program of Sleep Medicine Epidemiology. See [LICENSE](https://github.com/sleepepi/randomization/blob/master/LICENSE) for further details.
+Copyright (c) 2015 Division of Sleep and Circadian Disorders Program in Sleep and Cardiovascular Medicine. See [LICENSE](https://github.com/sleepepi/randomization/blob/master/LICENSE) for further details.
