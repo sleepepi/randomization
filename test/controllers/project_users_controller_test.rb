@@ -33,7 +33,7 @@ class ProjectUsersControllerTest < ActionController::TestCase
 
   test "should create project user and automatically add associated user" do
     assert_difference('ProjectUser.count') do
-      post :create, project_user: { project_id: projects(:four).id, editor: true }, editors_text: users(:pending).name + " [#{users(:pending).email}]", format: 'js'
+      post :create, project_user: { project_id: projects(:four).id, editor: true }, editors_text: users(:associated).name + " [#{users(:associated).email}]", format: 'js'
     end
 
     assert_not_nil assigns(:project)

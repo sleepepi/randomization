@@ -16,7 +16,6 @@ class User < ActiveRecord::Base
   include Deletable
 
   # Named Scopes
-  scope :current, -> { where deleted: false }
   scope :search, lambda { |arg| where( 'LOWER(first_name) LIKE ? or LOWER(last_name) LIKE ? or LOWER(email) LIKE ?', arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%'), arg.to_s.downcase.gsub(/^| |$/, '%') ) }
   scope :with_project, lambda { |*args| where("users.id in (select projects.user_id from projects where projects.id IN (?) and projects.deleted = ?) or users.id in (select project_users.user_id from project_users where project_users.project_id IN (?) and project_users.editor IN (?))", args.first, false, args.first, args[1] ) }
 
@@ -62,12 +61,11 @@ class User < ActiveRecord::Base
 
   # Overriding Devise built-in active_for_authentication? method
   def active_for_authentication?
-    super and self.status == 'active' and not self.deleted?
+    super and not self.deleted?
   end
 
   def destroy
     super
-    update_column :status, 'inactive'
     update_column :updated_at, Time.now
   end
 

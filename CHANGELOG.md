@@ -3,6 +3,7 @@
 ### Enhancements
 **General Changes**
   - Streamlined login system by removing alternate logins
+  - Removed approval process for new user registration
   - Use of Ruby 2.2.2 is now recommended
 - **Gem Changes**
   - Use Figaro to centralize application configuration
